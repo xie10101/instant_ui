@@ -1,0 +1,32 @@
+// 检查是否可以使用已经定义的scss变量 
+// 只有引入才能使用 - 可以进行全局引入  
+
+.btn{
+    // 
+    position : relative;
+    display:inline-block;
+    font-weight: var.$btn-font-weight;
+    font-size: var.$btn-font-size;
+    line-height: var.$btn-line-height;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;  // 按钮中文字不换行
+    background-image: none ;
+    vertical-align: middle;    
+    border:var.$btn-border-width solid transparent;
+    padding: var.$btn-padding-y var.$btn-padding-x;
+    border-radius: var.$btn-border-radius;
+    box-shadow: var.$btn-box-shadow;
+    cursor:pointer;
+    transition: var.$btn-transition;
+    // background-color: var.$primary;
+    &.disabled,
+    &[disabled]{
+        cursor:not-allowed;
+        opacity: var.$btn-disabled-opacity;
+        box-shadow: var.$btn-box-shadow;
+        >*{
+            pointer-events: none; 
+        }
+    }
+}

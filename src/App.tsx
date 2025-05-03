@@ -1,19 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// 声明的命名空间 
+import { JSX } from 'react'
+import Button from './components/Button/Button' 
+// 使用时引入枚举量进行引用使用 
+import { ButtonSize,ButtonType } from './components/Button/Button'
 
-function App() {
+function App (): JSX.Element {
   const [count, setCount] = useState(0)
-
   return (
     <>
+      <Button>Hello</Button>
+      <Button type={ButtonType.Primary} disabled={true}>Primary</Button>
+      <Button type={ButtonType.Danger} size={ButtonSize.Large}>Danger</Button>
+      <Button href='https://www.baidu.com' disabled={true}  type={ButtonType.Link}>Link</Button>
+      <h1 >123</h1>
+      <h2>123</h2>
+      <h3>213</h3>
       <div>
         <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+        123
         </a>
         <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+        123
         </a>
       </div>
       <h1>Vite + React</h1>
@@ -28,6 +36,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div style={{ width: '100px', height: '100px',backgroundColor:"red ",textAlign:"center" }}>
+        <span>12331</span>
+      </div>
+      <div>
+        
+
+      </div>
     </>
   )
 }
