@@ -10,9 +10,13 @@ function App (): JSX.Element {
   return (
     <>
       <Button>Hello</Button>
-      <Button type={ButtonType.Primary} disabled={true}>Primary</Button>
+      <Button size={ButtonSize.Large}>Large</Button>
+      <Button  disabled={true}>disabled</Button>
+      <Button type={ButtonType.Primary}>Primary</Button>
       <Button type={ButtonType.Danger} size={ButtonSize.Large}>Danger</Button>
-      <Button href='https://www.baidu.com' disabled={true}  type={ButtonType.Link}>Link</Button>
+      <Button href='https://www.baidu.com' type={ButtonType.Link}>Link</Button>
+      <Button href='https://www.baidu.com' disabled={true} type={ButtonType.Link}>Link</Button>
+     
       <h1 >123</h1>
       <h2>123</h2>
       <h3>213</h3>

@@ -1,12 +1,11 @@
 // 检查是否可以使用已经定义的scss变量 
 // 只有引入才能使用 - 可以进行全局引入  
-
+@use "../../styles/mixins" as *; // 引入mixins.scss文件
 .btn{
     // 
     position : relative;
     display:inline-block;
     font-weight: var.$btn-font-weight;
-    font-size: var.$btn-font-size;
     line-height: var.$btn-line-height;
     text-align: center;
     text-decoration: none;
@@ -14,19 +13,63 @@
     background-image: none ;
     vertical-align: middle;    
     border:var.$btn-border-width solid transparent;
-    padding: var.$btn-padding-y var.$btn-padding-x;
-    border-radius: var.$btn-border-radius;
+    @include button-size(var.$btn-padding-x, var.$btn-padding-y,var.$btn-font-size, var.$btn-border-radius); // 引入mixin函数
     box-shadow: var.$btn-box-shadow;
     cursor:pointer;
     transition: var.$btn-transition;
-    // background-color: var.$primary;
-    &.disabled,
-    &[disabled]{
+    /**
+    / &动态代表父类选择器 表示对应类名存在disabled属性和存在相应类名btn-disable的标签 
+    */
+    &.disabled,  &[disabled]{ 
         cursor:not-allowed;
         opacity: var.$btn-disabled-opacity;
         box-shadow: var.$btn-box-shadow;
         >*{
             pointer-events: none; 
         }
+    }
+}
+
+.btn-large{
+    @include button-size(var.$btn-padding-x-lg, var.$btn-padding-y-lg,var.$btn-font-size-lg, var.$btn-border-radius-lg);
+
+}
+
+.btn-small{
+    @include button-size(var.$btn-padding-x-sm, var.$btn-padding-y-sm,var.$btn-font-size-sm, var.$btn-border-radius-sm);
+}
+
+.btn-primary{
+    @include button-style(var.$primary,var.$primary,var.$white);
+}
+.btn-danger{
+    @include button-style(var.$danger,var.$danger,var.$white);
+}
+
+//正常状态：灰黑状态 ，hover 白蓝 
+.btn-default{
+    @include button-style(var.$white,var.$gray-400,var.$body-color,var.$primary,var.$white,var.$primary);
+}
+
+.btn-link{
+    font-weight: var.$font-weight-normal;
+    color: var.$btn-link-color;
+    text-decoration: var.$link-decoration;
+    //抵消 - btn 的默认设置
+    box-shadow: none !important;
+    border: none;
+    // 设置伪类 - 状态 
+    &:hover{
+        color: var.$btn-link-hover-color;
+        text-decoration: var.$link-hover-decoration;
+        box-shadow: none;
+    }
+    &:focus,&.focus{
+        text-decoration: var.$link-hover-decoration;
+        box-shadow: none;
+    }
+    &:disabled,&.disabled{
+       color: var.$btn-link-disabled-color;
+       pointer-events: none;
     }
 }
