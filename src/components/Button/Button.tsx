@@ -7,6 +7,9 @@
  */
 import React from "react";
 import classNames from "classnames";
+import { ButtonHTMLAttributes } from 'react';
+import { AnchorHTMLAttributes } from 'react';
+
 import "./_style.scss";
 export  enum ButtonSize {
   Large= "large",
@@ -28,13 +31,33 @@ interface ButtonProps {
   children?: React.ReactNode;
   disabled?: boolean; // 是否禁用
   href? :string; 
-  onClick?: () => void
   className?: string; // 自定义类名
 }
 
-const Button: React.FC<ButtonProps> = (props : ButtonProps) => {
+// 扩展 props
+
+
+
+// 获取原生 button 的 props 类型
+type NativeBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps; // 交叉类型
+
+// 获取原生 a 标签的 props 类型
+type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
+
+
+// 使用类型谓词进行类型守卫
+function isAnchorProps(props: ButtonPropsPro): props is NativeAnchorProps {
+  return props.type === ButtonType.Link && 'href' in props;
+}
+// 联合类型 可以是 a标签原生或者是 button 原生 props 
+type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>;
+
+const Button: React.FC<ButtonPropsPro> = (props : ButtonPropsPro) => {
     
-    const { size,type=ButtonType.default,children,disabled=false,href,onClick,className } = props; // 解构赋值
+
+
+  
+    const { size,type=ButtonType.default,children,disabled=false,href,className,...restprops } = props; // 解构赋值
  /**
   * 参数 ： 接收字符串和键值对 对象 
   * 字符串是真值键值对的缩写- 默认包含该类名 
@@ -42,24 +65,48 @@ const Button: React.FC<ButtonProps> = (props : ButtonProps) => {
  */
 
 // 默认 btn  
-const classes = classNames("btn",{
+const classes = classNames("btn",`${className}`,{
     [`btn-${size}`]: size,
     [`btn-${type}`]: type,
     "disabled":(type===ButtonType.Link)&&disabled,  //当且仅当 类型为链接 / 且 传递的disable Props 的值为 true时 表达值式返回值才为true ?? 
 }
 )
     // 设置动态className
-        if(type===ButtonType.Link&&href){
-        return (
-                <a className={classes} href={href}>{children}</a>
-               )
+        // if(type===ButtonType.Link&&href){
+        // return (
+        //         <a className={classes} {...restprops} href={href}>{children}</a>
+        //        )
+        // }
+        // else{
+        // return (
+        //         <button className={classes} {...restprops} disabled={disabled} >{children}</button>
+        //        )
+        // }
+        // 在使用类型断言之前需要做到类型检查 确保 type为link 才可设置props --
+        //  a标签属性
+        if (isAnchorProps(props)) {
+          return (
+            <a
+              className={classes}
+              href={href}
+              {...restprops as AnchorHTMLAttributes<HTMLAnchorElement>}
+            >
+              {children}
+            </a>
+          );
         }
-        else{
+      
         return (
-                <button className={classes} onClick={onClick} disabled={disabled} >{children}</button>
-               )
-        }
-}
+          <button
+            className={classes}
+            disabled={disabled}
+            // 使用断言解决类型检查 
+            {...restprops as ButtonHTMLAttributes<HTMLButtonElement>}
+          >
+            {children}
+          </button>
+        );
+      }
 
 
 export default Button;
