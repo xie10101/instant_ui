@@ -45,18 +45,16 @@ type NativeBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps; // 
 type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
 
 
-// 使用类型谓词进行类型守卫
-function isAnchorProps(props: ButtonPropsPro): props is NativeAnchorProps {
-  return props.type === ButtonType.Link && 'href' in props;
-}
+// 使用类型谓词进行类型守卫-- 对传入props 进行判断 判断使用 标签类型  
+//  ----此处的NativeAnchorProps 没有实际作用 ？ 
+// function isAnchorProps(props: ButtonPropsPro): props is NativeAnchorProps {
+//   return ;
+// }
 // 联合类型 可以是 a标签原生或者是 button 原生 props 
 type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>;
 
 const Button: React.FC<ButtonPropsPro> = (props : ButtonPropsPro) => {
     
-
-
-  
     const { size,type=ButtonType.default,children,disabled=false,href,className,...restprops } = props; // 解构赋值
  /**
   * 参数 ： 接收字符串和键值对 对象 
@@ -68,29 +66,24 @@ const Button: React.FC<ButtonPropsPro> = (props : ButtonPropsPro) => {
 const classes = classNames("btn",`${className}`,{
     [`btn-${size}`]: size,
     [`btn-${type}`]: type,
-    "disabled":(type===ButtonType.Link)&&disabled,  //当且仅当 类型为链接 / 且 传递的disable Props 的值为 true时 表达值式返回值才为true ?? 
+    "disabled":(type===ButtonType.Link)&&disabled,  //当且仅当 类型为链接 且 传递的disable Props 的值为 true时 表达值式返回值才为true
 }
 )
-    // 设置动态className
-        // if(type===ButtonType.Link&&href){
-        // return (
-        //         <a className={classes} {...restprops} href={href}>{children}</a>
-        //        )
-        // }
-        // else{
-        // return (
-        //         <button className={classes} {...restprops} disabled={disabled} >{children}</button>
-        //        )
-        // }
+
+
         // 在使用类型断言之前需要做到类型检查 确保 type为link 才可设置props --
         //  a标签属性
-        if (isAnchorProps(props)) {
+        // isAnchorProps(props) 
+        // "href" in 操作 判断属性存在行
+        if ( props.type === ButtonType.Link && 'href' in props) {
           return (
             <a
               className={classes}
               href={href}
+    
               {...restprops as AnchorHTMLAttributes<HTMLAnchorElement>}
             >
+              {/*  此处必须做断言呀  */}
               {children}
             </a>
           );
@@ -107,6 +100,12 @@ const classes = classNames("btn",`${className}`,{
           </button>
         );
       }
+
+/*
+两部分待处理 ： 
+1. disabled 的处理 分析 
+2. 类型断言的使用分析  
+*/
 
 
 export default Button;

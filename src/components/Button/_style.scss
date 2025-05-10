@@ -20,7 +20,9 @@
     /**
     / &动态代表父类选择器 表示对应类名存在disabled属性和存在相应类名btn-disable的标签 
     */
-    &.disabled,  &[disabled]{ 
+    
+// , 逗号连接两种 不同的禁用状态表示 - 对于选择器是或者的关系 // 此处 .disabled的设置存在意义 作用于link状态 -
+    &.disabled, &[disabled]{ 
         cursor:not-allowed;
         opacity: var.$btn-disabled-opacity;
         box-shadow: var.$btn-box-shadow;
@@ -68,7 +70,8 @@
         text-decoration: var.$link-hover-decoration;
         box-shadow: none;
     }
-    &:disabled,&.disabled{
+    // &:disabled, // a标签中 不存在disabled 属性  原生设置 - 只能使用 类名控制 
+    &.disabled{
        color: var.$btn-link-disabled-color;
        pointer-events: none;
     }
