@@ -1,10 +1,10 @@
 {
   "files": [],
   "compilerOptions": {
-    "types": ["jest", "@types/jest"],
-    "esModuleInterop": true, // 允许使用 import x from 'module' 导入模块 --针对 commonjs 导出库 
-    //允许 TypeScript 更自然地处理 CommonJS 模块 将common导出进行 自动编译辅助 处理 
-    "allowSyntheticDefaultImports": true, // 闪避 类型检查 
+    "types": ["jest", "@types/jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true, // 允许使用 import x from 'module' 导入模块 --针对 commonjs 导出库
+    //允许 TypeScript 更自然地处理 CommonJS 模块 将common导出进行 自动编译辅助 处理
+    "allowSyntheticDefaultImports": true, // 闪避 类型检查
     "jsx": "react-jsx", // 或 "react" 17版本之后 jsx转换方式得到更新需要 显示引入 React进行jsx转换 - creacteElement
     "jsxImportSource": "react" // 如果使用 React 17+ 的新 JSX 转换
   },
@@ -12,4 +12,5 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ]
+  //
 }
