@@ -1,0 +1,90 @@
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 30px;
+    list-style: none;
+    border-bottom: var.$menu-border-width solid var.$menu-border-color;
+    box-shadow: var.$menu-box-shadow;
+   .menu-item{
+      padding: var.$menu-item-padding-y var.$menu-item-padding-x;
+      margin: 0 2px; 
+      cursor: pointer;
+      transition: var.$menu-transition; //过渡效果
+       &:hover,&:focus{
+          text-decoration: none;
+       }
+       &.is-disabled{
+          color:var.$menu-item-disabled-color ;
+          pointer-events: none;
+          cursor: default;
+       }
+       &.is-active,&:hover{
+        color:var.$menu-item-active-color;
+        border-bottom: var.$menu-item-active-border-width solid var.$menu-item-active-color;
+       }
+   }
+   // 对 sub-menu设置单独样式 由于类名不同
+   .sub-menu{
+      margin: 0 2px; 
+      cursor: pointer;
+      transition: var.$menu-transition; //过渡效果
+      position: relative;
+      &.is-active,&:hover{
+        border-bottom: var.$menu-item-active-border-width solid var.$menu-item-active-color;
+       }
+      //  设置title-div类似于上面的item块样式
+       .sub-menu-title{
+         padding: var.$menu-item-padding-y var.$menu-item-padding-x;
+         cursor: pointer;
+         transition:var.$menu-transition;
+         &.is-active,&:hover{
+        color:var.$menu-item-active-color;
+       }
+      }
+         .sub-menu-ul
+      {   
+         position: absolute;
+         list-style:none;
+         border: var.$menu-border-width solid var.$menu-border-color;
+         box-shadow: var.$menu-box-shadow;
+         padding: 0px;
+
+         .menu-item{
+         border-left:var.$menu-item-active-border-width solid transparent;
+         white-space: nowrap;
+         &.is-active,&:hover{ 
+         border-bottom:0px;
+         }
+         }
+      }
+}
+}
+.menu-vertical{
+    flex-direction: column;
+    border-bottom: 0px;
+    border-right:var.$menu-border-width solid var.$menu-border-color;
+    .menu-item{
+      border-left:var.$menu-item-active-border-width solid transparent;
+      &.is-active,&:hover{ 
+       border-bottom:0px;
+       border-left: var.$menu-item-active-border-width solid var.$menu-item-active-color;
+      }
+    }
+     .sub-menu{
+      border-left:var.$menu-item-active-border-width solid transparent;
+      &.is-active,&:hover{
+        border-bottom:0px;
+        border-left: var.$menu-item-active-border-width solid var.$menu-item-active-color;
+       }
+         .sub-menu-ul
+      {    
+         position: relative;
+         list-style:none;
+         box-shadow: none;
+         border:0px;
+         padding-left: 30px;
+      }
+}
+}
+// 此处盒子边框计算没有使用 border-box - padding设置撑开盒子，设置边框和阴影 flex布局效果 

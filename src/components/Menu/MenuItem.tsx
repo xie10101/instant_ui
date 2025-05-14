@@ -2,12 +2,13 @@
 import classNames from "classnames";
 import { useContext } from "react";
 import { MenuContext } from "./Menu";
-interface MenuItemProps {
+export interface MenuItemProps {
     className?:string;
     style?:React.CSSProperties;
     children?:React.ReactNode;
     disabled?:boolean;
-    index:number|string; // index设置为必传项 
+    index?:number|string; // index设置为必传项 
+
 }
 
 const MenuItem :React.FC<MenuItemProps> = (porps) => {
@@ -18,7 +19,7 @@ const MenuItem :React.FC<MenuItemProps> = (porps) => {
       "is-active":contextIndex===index, // 激活样式 ： 类名：is-active ， 样式： color: #1890ff; background-color: #e6f7ff; border-color: #1890ff;
     })
     const handleClick = () => {
-   if(onSelect && !disabled)
+   if(onSelect && !disabled &&index)
     {
       onSelect(index);
     }
@@ -27,5 +28,5 @@ const MenuItem :React.FC<MenuItemProps> = (porps) => {
         <li className={classes} onClick={handleClick} style={style}>{children}</li>  
     );
 }
- 
+ MenuItem.displayName = "MenuItem"; //显示设置displayName属性 ： 用于识别子组件; 
 export default MenuItem;

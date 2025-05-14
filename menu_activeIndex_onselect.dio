@@ -10,7 +10,7 @@
                 <mxCell id="3" value="index" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="-50" y="440" width="130" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="index" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="4" value="index&amp;nbsp; &amp;nbsp;onclick&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="280" y="430" width="150" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="index" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -22,6 +22,9 @@
                         <mxPoint x="490" y="350" as="targetPoint"/>
                         <Array as="points"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="23" style="edgeStyle=none;html=1;" edge="1" parent="1" source="9" target="16">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="传入 - props - activeKey- 默认高亮项" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="140" y="70" width="120" height="60" as="geometry"/>
@@ -41,27 +44,30 @@
                 <mxCell id="15" style="edgeStyle=none;html=1;" edge="1" parent="1" source="12" target="5">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="item项的类名-active与选中index和自身index相等时设置高亮类名" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="12" value="&lt;font style=&quot;color: rgb(255, 49, 137);&quot;&gt;item项的类名-active与选中index和自身index相等时设置高亮类名&lt;/font&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="280" y="320" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="17" style="edgeStyle=none;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="16" target="12">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="存在动态状态值-currentActiveIndex" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="470" y="185" width="140" height="80" as="geometry"/>
+                <mxCell id="16" value="存在动态状态值-代表高亮菜单项的index-currentActiveIndex" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="185" width="160" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" style="edgeStyle=none;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="2">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="132" y="271" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="19" value="点击相应子组件-子组件将index传递给父组件-通过context中回调函数" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="18">
+                <mxCell id="19" value="&lt;font style=&quot;color: light-dark(rgb(237, 7, 7), rgb(237, 237, 237));&quot;&gt;点击相应子组件-子组件将index传递给父组件-通过context中回调函数&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="18">
                     <mxGeometry x="0.0167" relative="1" as="geometry">
                         <mxPoint x="-2" y="7" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="21" value="父组件通过回调函数接受index，设置currentASctive为相应index，同时将index传递给onSelect函数&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="120" y="185" width="180" height="85" as="geometry"/>
+                <mxCell id="21" value="&lt;font style=&quot;color: rgb(255, 16, 16);&quot;&gt;父组件通过回调函数接受index，设置currentASctive为相应index，同时将index传递给onSelect函数&amp;nbsp;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="180" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="此图代表- 菜单项根据点击状态实现高亮类名绑定&lt;div&gt;同时执行ionSelect 传递高亮index&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" vertex="1" parent="1">
+                    <mxGeometry x="-140" y="60" width="140" height="160" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
