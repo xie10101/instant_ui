@@ -1,29 +1,76 @@
 import classNames from "classnames";
-import { Children, ReactElement } from "react";
+import React, { Children, cloneElement, ReactElement } from "react";
 import { MenuItemProps } from "./MenuItem";
+import { useState } from "react";
+import { MenuContext } from "./Menu";
 // index -作为标识？实际和一般的MenuItem一致
 // title 设置存在区别 
 export interface SubMenuProps {
-    index?:number|string;
+    index?:string;
     title :string ;
     className?:string;
     children?:React.ReactNode;
 }
+
 const SubMenu :React.FC<SubMenuProps> = (props) => {
     const { className, title, index, children } = props;
-    const classes = classNames("sub-menu",className);
-   
+        // 获取context ： 
+    const context = React.useContext(MenuContext);
+    
+    const isOpen =(index&&context.mode==="vertical")?context.defaultOpenSubMenus?.includes(index!):false; // 判断处理包含: 1.mode判断 2. index 存在 3. 包含 
+
+    const classes = classNames("sub-menu",className,{
+        "is-active":context.index === index
+    });
+    // index 选中与否 决定 是否状态为 true 
+    const [open, setOpen] = useState(isOpen);
+    // 为 ul设置class 
+    const subMenuUlClasses = classNames("sub-menu-ul",{ // 添加类名
+        "open":open,
+    })
+  // let timer:NodeJS.Timeout;
+  /***
+   * 用于点击事件处理回调 --封装后
+   */
+    const handleMouse = (e:React.MouseEvent, toggle:boolean) => { 
+
+      e.preventDefault();
+    //设置计时器 
+      setOpen(toggle);
+    if(context.onSelect !== undefined && index){ // 当 onSelect props 存在时，执行回调函数 ：
+    context.onSelect(index);
+    }
+
+  }
+  /**
+   * 
+   * 设置两个事件对象 
+   * 三元表达式 处理 
+   * 两个事件 - 鼠标进入 和鼠标离开 - 
+   * MouseEnter 
+   * MouseLeave
+   */
+  const  clickEvents=context.mode === "vertical" ?{
+onClick:(e:React.MouseEvent) => { handleMouse(e,!open) }
+  }:{}
+  const hoverEvents =context.mode === "horizontal"?{
+    onMouseEnter:(e:React.MouseEvent) => { handleMouse(e,true) }, // 鼠标进入事件
+     // 鼠标进入事件
+    onMouseLeave:(e:React.MouseEvent) => { handleMouse(e,false) } // 鼠标离开事件
+  }:{};
     // 使用 函数组件渲染内部嵌套菜单 
     const renderChildren = () => { 
-    const filterchildren = Children.map(children, (child, ) => { 
+    const filterchildren = Children.map(children, (child,i) => { 
     const childrenElement = child as ReactElement<MenuItemProps> ;
      if((childrenElement.type as React.FC<MenuItemProps>).displayName === 'MenuItem')
       {
-         return childrenElement
+        // 不在外部设置index 变量 - 造成名字重叠 / 
+         return  cloneElement( childrenElement ,{index:`${index}-${i.toString()}`}
+         )
       } 
     })
     return (
-      <ul className="sub-menu-ul">
+      <ul className={subMenuUlClasses}>
         {filterchildren}
       </ul>
      )
@@ -32,12 +79,12 @@ const SubMenu :React.FC<SubMenuProps> = (props) => {
     return ( 
         <>
         {/* 单个sub菜单项  */}
-        <li className={classes} key={index}>
-            <div className="sub-menu-title">
+        <li className={classes} key={index} {...hoverEvents}>
+            <div className="sub-menu-title" {...clickEvents}>
                 {title}
             </div>
             {
-              // 实际一个Ul列表中包含多个li 
+              // 实际一个Ul列表中包含多个li --MenuItem 
             renderChildren()
             }
         </li>

@@ -7,7 +7,7 @@ export interface MenuItemProps {
     style?:React.CSSProperties;
     children?:React.ReactNode;
     disabled?:boolean;
-    index?:number|string; // index设置为必传项 
+    index?:string; // index设置为必传项 
 
 }
 

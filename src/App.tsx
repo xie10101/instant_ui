@@ -13,7 +13,7 @@ function App (): JSX.Element {
   return (
     <>
 
-       <Menu style={{width:"200px",height:"300px"}} onSelect={()=>{}} mode={"vertical"}>
+       <Menu style={{width:"200px",height:"300px"}} onSelect={(index)=>{console.log(index)}} defaultOpenSubMenus={['2']} mode={"vertical"}>
         <MenuItem>cool link</MenuItem>
         <MenuItem>cool link</MenuItem>
         <SubMenu title='cool link'>
