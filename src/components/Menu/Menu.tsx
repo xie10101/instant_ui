@@ -1,7 +1,7 @@
 
 import React, { Children, cloneElement, ReactElement } from 'react'; // 
 import  classNames from 'classnames';
-type onSelectType = (selectedKey:string)=>void ;
+type onSelectType = (selectedKey:string, event?: React.SyntheticEvent<HTMLUListElement>)=>void ;
 type Mode = "horizontal"|"vertical";
 import './_style.scss';
 import { MenuItemProps  } from './MenuItem';
@@ -23,10 +23,13 @@ interface MenuContextType {
     defaultOpenSubMenus?:string[];
 }
 
+// 获取原生的ul 类型 ：
+export type Props =React.HTMLAttributes<HTMLUListElement> & MenuProps;
+
 export const MenuContext = React.createContext<MenuContextType>({
     index:"0",
 })
-const Menu:React.FC<MenuProps> = (props) => {
+const Menu:React.FC<Props> = (props) => {
 const {className , style ,children, activeIndex,onSelect,mode="horizontal",defaultOpenSubMenus} = props;
 // 设置实现类名 ：
 const classes = classNames("menu",className,{ // 添加类名

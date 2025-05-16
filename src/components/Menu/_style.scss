@@ -46,13 +46,13 @@
       {   
          position: absolute;
          list-style:none;
-         border: var.$menu-border-width solid var.$menu-border-color;
+         border: var.$menu-border-width solid transparent;
          box-shadow: var.$menu-box-shadow;
          padding: 0px;
          max-height: 0; 
          // 高度未达到是自适应 ， 超出时根据 overflow进行处理 
          overflow: hidden; // 隐藏溢出内容
-         // transform-origin: top;
+         transform-origin: top;
          transition: all 0.3s ease;
          .menu-item{
          border-left:var.$menu-item-active-border-width solid transparent;
@@ -63,6 +63,7 @@
          }
          &.open{
              max-height: 700px; // 设置一个足够大的值以显示内容
+             border: var.$menu-border-width solid var.$menu-border-color;
          }
       }
 }
@@ -92,8 +93,20 @@
          box-shadow: none;
          border:0px;
          padding-left: 30px;
+            &.open{
+             border:0px;
+         }
       }
 }
 
 }
 // 此处盒子边框计算没有使用 border-box - padding设置撑开盒子，设置边框和阴影 flex布局效果 
+
+
+/**
+此处存在类名使用的注意点 ：
+以上使用中存在同级类名选择器 和 子代类名选择器 ，
+ 后一同级类名选择器下子代选择器会覆盖前一同级类名选择器下子代选择器;
+例如 menu -> sub-menu -> .sub-menu-ul ->.open会覆盖 menu-vertical -> sub-menu ->  .sub-menu-ul .open;
+
+*/

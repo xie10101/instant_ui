@@ -16,9 +16,12 @@ const SubMenu :React.FC<SubMenuProps> = (props) => {
     const { className, title, index, children } = props;
         // 获取context ： 
     const context = React.useContext(MenuContext);
-    
-    const isOpen =(index&&context.mode==="vertical")?context.defaultOpenSubMenus?.includes(index!):false; // 判断处理包含: 1.mode判断 2. index 存在 3. 包含 
-
+    //此处需要对 context.defaultOpenSubMenus做断言 ？ 
+    //强制断言任然会报错 编译错误 
+    let isOpen :boolean=false;
+    if(context.defaultOpenSubMenus!== undefined){
+    isOpen =(index&&context.mode==="vertical")?context.defaultOpenSubMenus.includes(index!):false; // 判断处理包含: 1.mode判断 2. index 存在 3. 包含 
+    }
     const classes = classNames("sub-menu",className,{
         "is-active":context.index === index
     });
