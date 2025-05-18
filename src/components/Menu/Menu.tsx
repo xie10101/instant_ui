@@ -6,9 +6,13 @@ type Mode = "horizontal"|"vertical";
 import './_style.scss';
 import { MenuItemProps  } from './MenuItem';
 export interface MenuProps {
+
   className?:string;
   style?:React.CSSProperties;
   activeIndex?:string;
+  /**
+   * 点击菜单项回调 //注释用于 文档显示 
+   */
   onSelect?: onSelectType ;    //点击菜单后的回调- 参数是 当前被点击菜单项的index- 被激活的index 
   mode?:Mode;
   children?:React.ReactNode;
