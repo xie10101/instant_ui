@@ -47,7 +47,7 @@ type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
 //   return ;
 // }
 // 联合类型 可以是 a标签原生或者是 button 原生 props
-type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>;
+type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>
 
 const Button: React.FC<ButtonPropsPro> = (props: ButtonPropsPro) => {
   const {
