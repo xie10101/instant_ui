@@ -19,7 +19,7 @@
     "lint:strict": "eslint --max-warnings=0 .",
     "lint:css": "stylelint \"src/**/*.{css,scss}\"",
     "lint:css:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
-    "commit": "cz"
+     "commit":"cz"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -27,13 +27,11 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+      "prepare-commit-msg": "exec < /dev/tty && npx commit --hook || true"
     }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.22.0",
     "@jest/globals": "^29.7.0",
     "@storybook/addon-essentials": "^8.6.14",
