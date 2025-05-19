@@ -3,10 +3,10 @@
 
 */
 
-@use "_variables" as * ;
-// 主要是默认样式使用
-@use "_normalize" as * ;
+@use 'variables' as *;
 
-@use "_mixins" as * ;
+// 主要是默认样式使用
+@use 'normalize' as *;
+@use 'mixins' as *;
 
 // 导入 - button 组件 的样式文件 ：

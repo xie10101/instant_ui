@@ -1,78 +1,108 @@
-// 检查是否可以使用已经定义的scss变量 
-// 只有引入才能使用 - 可以进行全局引入  
-@use "../../styles/mixins" as *; // 引入mixins.scss文件
-.btn{
-    // 
-    position : relative;
-    display:inline-block;
-    font-weight: var.$btn-font-weight;
-    line-height: var.$btn-line-height;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;  // 按钮中文字不换行
-    background-image: none ;
-    vertical-align: middle;    
-    border:var.$btn-border-width solid transparent;
-    @include button-size(var.$btn-padding-x, var.$btn-padding-y,var.$btn-font-size, var.$btn-border-radius); // 引入mixin函数
-    box-shadow: var.$btn-box-shadow;
-    cursor:pointer;
-    transition: var.$btn-transition;
-    /**
+// 检查是否可以使用已经定义的scss变量
+// 只有引入才能使用 - 可以进行全局引入
+@use '../../styles/mixins' as *; // 引入mixins.scss文件
+.btn {
+  background-image: none;
+  border: var.$btn-border-width solid transparent;
+  box-shadow: var.$btn-box-shadow;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: var.$btn-font-weight;
+  line-height: var.$btn-line-height;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: var.$btn-transition;
+  vertical-align: middle;
+  white-space: nowrap; // 按钮中文字不换行
+
+  @include button-size(
+    var.$btn-padding-x,
+    var.$btn-padding-y,
+    var.$btn-font-size,
+    var.$btn-border-radius
+  ); // 引入mixin函数
+
+  /**
     / &动态代表父类选择器 表示对应类名存在disabled属性和存在相应类名btn-disable的标签 
     */
-    
-// , 逗号连接两种 不同的禁用状态表示 - 对于选择器是或者的关系 // 此处 .disabled的设置存在意义 作用于link状态 -
-    &.disabled, &[disabled]{ 
-        cursor:not-allowed;
-        opacity: var.$btn-disabled-opacity;
-        box-shadow: var.$btn-box-shadow;
-        >*{
-            pointer-events: none; 
-        }
+
+  // , 逗号连接两种 不同的禁用状态表示 - 对于选择器是或者的关系 // 此处 .disabled的设置存在意义 作用于link状态 -
+  &.disabled,
+  &[disabled] {
+    box-shadow: var.$btn-box-shadow;
+    cursor: not-allowed;
+    opacity: var.$btn-disabled-opacity;
+
+    > * {
+      pointer-events: none;
     }
+  }
 }
 
-.btn-large{
-    @include button-size(var.$btn-padding-x-lg, var.$btn-padding-y-lg,var.$btn-font-size-lg, var.$btn-border-radius-lg);
-
+.btn-large {
+  @include button-size(
+    var.$btn-padding-x-lg,
+    var.$btn-padding-y-lg,
+    var.$btn-font-size-lg,
+    var.$btn-border-radius-lg
+  );
 }
 
-.btn-small{
-    @include button-size(var.$btn-padding-x-sm, var.$btn-padding-y-sm,var.$btn-font-size-sm, var.$btn-border-radius-sm);
+.btn-small {
+  @include button-size(
+    var.$btn-padding-x-sm,
+    var.$btn-padding-y-sm,
+    var.$btn-font-size-sm,
+    var.$btn-border-radius-sm
+  );
 }
 
-.btn-primary{
-    @include button-style(var.$primary,var.$primary,var.$white);
-}
-.btn-danger{
-    @include button-style(var.$danger,var.$danger,var.$white);
+.btn-primary {
+  @include button-style(var.$primary, var.$primary, var.$white);
 }
 
-//正常状态：灰黑状态 ，hover 白蓝 
-.btn-default{
-    @include button-style(var.$white,var.$gray-400,var.$body-color,var.$primary,var.$white,var.$primary);
+.btn-danger {
+  @include button-style(var.$danger, var.$danger, var.$white);
 }
 
-.btn-link{
-    font-weight: var.$font-weight-normal;
-    color: var.$btn-link-color;
-    text-decoration: var.$link-decoration;
-    //抵消 - btn 的默认设置
-    box-shadow: none !important;
-    border: none;
-    // 设置伪类 - 状态 
-    &:hover{
-        color: var.$btn-link-hover-color;
-        text-decoration: var.$link-hover-decoration;
-        box-shadow: none;
-    }
-    &:focus,&.focus{
-        text-decoration: var.$link-hover-decoration;
-        box-shadow: none;
-    }
-    // &:disabled, // a标签中 不存在disabled 属性  原生设置 - 只能使用 类名控制 
-    &.disabled{
-       color: var.$btn-link-disabled-color;
-       pointer-events: none;
-    }
+// 正常状态：灰黑状态 ，hover 白蓝
+.btn-default {
+  @include button-style(
+    var.$white,
+    var.$gray-400,
+    var.$body-color,
+    var.$primary,
+    var.$white,
+    var.$primary
+  );
+}
+
+.btn-link {
+  border: none;
+
+  // 抵消 - btn 的默认设置
+  box-shadow: none !important;
+  color: var.$btn-link-color;
+  font-weight: var.$font-weight-normal;
+  text-decoration: var.$link-decoration;
+
+  // 设置伪类 - 状态
+  &:hover {
+    box-shadow: none;
+    color: var.$btn-link-hover-color;
+    text-decoration: var.$link-hover-decoration;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+    text-decoration: var.$link-hover-decoration;
+  }
+
+  // &:disabled, // a标签中 不存在disabled 属性  原生设置 - 只能使用 类名控制
+  &.disabled {
+    color: var.$btn-link-disabled-color;
+    pointer-events: none;
+  }
 }

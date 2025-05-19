@@ -1,33 +1,37 @@
+// 声明的命名空间
+import { JSX } from 'react';
+// 使用时引入枚举量进行引用使用
+import './App.css';
+import Menu from './components/Menu/Menu';
+import MenuItem from './components/Menu/MenuItem';
+import SubMenu from './components/Menu/SubMenu';
 
-// 声明的命名空间 
-import { JSX } from 'react'
-import Button from './components/Button/Button' 
-// 使用时引入枚举量进行引用使用 
-import { ButtonSize,ButtonType } from './components/Button/Button'
-import "./App.css"
-import Menu from "./components/Menu/Menu"
-import MenuItem from "./components/Menu/MenuItem"
-import SubMenu from './components/Menu/SubMenu'
-
-function App (): JSX.Element {
+function App(): JSX.Element {
   return (
     <>
-
-       <Menu style={{width:"200px",height:"300px"}} id={"menu-test"} onSelect={(index)=>{console.log(index)}} defaultOpenSubMenus={['2']} mode={"vertical"}>
+      <Menu
+        style={{ width: '200px', height: '300px' }}
+        id={'menu-test'}
+        onSelect={(index) => {
+          console.log(index);
+        }}
+        defaultOpenSubMenus={['2']}
+        mode={'vertical'}
+      >
         <MenuItem>cool link</MenuItem>
         <MenuItem>cool link</MenuItem>
-        <SubMenu title='cool link'>
+        <SubMenu title="cool link">
           <MenuItem>inner-link1</MenuItem>
           <MenuItem>inner-link2 </MenuItem>
           <MenuItem>inne-link3</MenuItem>
         </SubMenu>
         <MenuItem>cool link </MenuItem>
       </Menu>
-  
-      <Menu style={{width:"500px",height:"40px"}}  mode={'horizontal'}>
+
+      <Menu style={{ width: '500px', height: '40px' }} mode={'horizontal'}>
         <MenuItem>cool link</MenuItem>
         <MenuItem>cool link</MenuItem>
-        <SubMenu title='sub_menu'>
+        <SubMenu title="sub_menu">
           <MenuItem>inner-link1</MenuItem>
           <MenuItem>inner-link2 </MenuItem>
           <MenuItem>inne-link3</MenuItem>
@@ -43,7 +47,7 @@ function App (): JSX.Element {
       <Button href='https://www.baidu.com' type={ButtonType.Link}>Link</Button>
       <Button href='https://www.baidu.com' disabled={true} target='ssd' type={ButtonType.Link}>Link</Button> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

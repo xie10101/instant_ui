@@ -4,14 +4,14 @@
 
  //属性相同 - mixin便于重用
 */
-@use "sass:color"; 
+@use 'sass:color';
+@use 'variables' as var; // 引入变量文件
+$btn-border-width: var.$btn-border-width; // 边框宽度
 
-@use "variables" as var; // 引入变量文件
-$btn-border-width:var.$btn-border-width; // 边框宽度
-@mixin button-size($padding-x, $padding-y,$font-size,$border-radius) {
-padding: $padding-y $padding-x ;
-font-size: $font-size;
-border-radius: $border-radius;
+@mixin button-size($padding-x, $padding-y, $font-size, $border-radius) {
+  border-radius: $border-radius;
+  font-size: $font-size;
+  padding: $padding-y $padding-x;
 }
 
 /*
@@ -23,33 +23,47 @@ border-radius: $border-radius;
 对于不同状态的按钮
 对hover/focus状态的处理通过mixin函数设置实现相同处理 
 */
-@mixin button-style($background,$border,$color,$hover-color:$color,$hover-background:color.adjust($background, $lightness: 10.5%) ,$hover-border:color.adjust($border, $lightness: 10.5%)) {
-    color: $color;
-    //此边框设置 -会覆盖掉默认的边框设置 --其实存在重复 
-    border:$btn-border-width solid $border;
-    background: $background;
-    &:hover{
-        color: $hover-color;
-        background: $hover-background;
-        // 抵消默认设置的边框- 此前设置 border-color不产生效果
-        border:$btn-border-width solid $hover-border;
-    }
-    &:focus,&.focus{
-    color:$hover-color;
-    background:$hover-background;
-    border:$btn-border-width solid $hover-border;
-    outline: none;
- }
- &:disabled,&.disabled{
-    color:$color;
-    background:$background;
-    border:$btn-border-width solid $border;
-    outline: none;
- }
-    &:active{
-        color:$hover-color;
-        background:$hover-background;
-        border:$btn-border-width solid $hover-border;
-    }
+@mixin button-style(
+  $background,
+  $border,
+  $color,
+  $hover-color: $color,
+  $hover-background: color.adjust($background, $lightness: 10.5%),
+  $hover-border: color.adjust($border, $lightness: 10.5%)
+) {
+  background: $background;
 
+  // 此边框设置 -会覆盖掉默认的边框设置 --其实存在重复
+  border: $btn-border-width solid $border;
+  color: $color;
+
+  &:hover {
+    background: $hover-background;
+
+    // 抵消默认设置的边框- 此前设置 border-color不产生效果
+    border: $btn-border-width solid $hover-border;
+    color: $hover-color;
+  }
+
+  &:focus,
+  &.focus {
+    background: $hover-background;
+    border: $btn-border-width solid $hover-border;
+    color: $hover-color;
+    outline: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    background: $background;
+    border: $btn-border-width solid $border;
+    color: $color;
+    outline: none;
+  }
+
+  &:active {
+    background: $hover-background;
+    border: $btn-border-width solid $hover-border;
+    color: $hover-color;
+  }
 }

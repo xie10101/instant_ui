@@ -7,8 +7,8 @@
     "allowSyntheticDefaultImports": true, // 闪避 类型检查
     "jsx": "react-jsx", // 或 "react" 17版本之后 jsx转换方式得到更新需要 显示引入 React进行jsx转换 - creacteElement
     "jsxImportSource": "react", // 如果使用 React 17+ 的新 JSX 转换
-    "target": "ES2016",  // 或 "ESNext"
-    "lib": ["ES2016", "DOM"]  // 添加 ES2016 及以上版本
+    "target": "ES2016", // 或 "ESNext"
+    "lib": ["ES2016", "DOM"] // 添加 ES2016 及以上版本
   },
   "references": [
     { "path": "./tsconfig.app.json" },
