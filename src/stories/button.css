@@ -1,5 +1,6 @@
 .storybook-button {
   border: 0;
+  background-color: transparent;
   border-radius: 3em;
   cursor: pointer;
   display: inline-block;
