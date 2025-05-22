@@ -2,7 +2,7 @@
 // 存在 jsx的语法 ： 测试库提供的 render函数 ： 模拟dom环境
 import { fireEvent, render } from '@testing-library/react';
 import Button from './Button';
-import { ButtonSize, ButtonType } from './Button';
+
 import userEvent from '@testing-library/user-event';
 const defaultProps = {
   onClick: jest.fn(),
@@ -12,9 +12,9 @@ const defaultProps = {
  *
  */
 const test1Props = {
-  type: ButtonType.Primary,
+  type: "primary",
   className: 'test',
-  size: ButtonSize.Large,
+  size:"large",
 };
 const disabledProps = {
   disabled: true,
@@ -51,7 +51,7 @@ describe('测试 Button 组件', () => {
   });
   it('渲染 link 根据 type和href ', () => {
     const wrapper = render(
-      <Button type={ButtonType.Link} href="xxx">
+      <Button type="link" href="xxx">
         Link
       </Button>
     );

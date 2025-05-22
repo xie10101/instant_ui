@@ -1,4 +1,4 @@
-import Button, { ButtonSize, ButtonType } from './Button';
+import Button from './Button';
 
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -9,7 +9,7 @@ const buttonMeta: Meta<typeof Button> = {
   component: Button, //组件来源
   argTypes: {
     size: {
-      options: ['large', 'small'], //底层组件参数选项
+      options: ['large', 'small'," middle"], //底层组件参数选项
       control: { type: 'radio' },
     },
   },
@@ -34,24 +34,24 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    size: ButtonSize.Large,
-    type: ButtonType.Primary,
+    size: "middle",
+    type: "primary",
     children: 'Primary',
   },
 };
 
 export const Danger: Story = {
   args: {
-    size: ButtonSize.Large,
-    type: ButtonType.Danger,
+    size: "middle",
+    type: "danger",
     children: 'Danger',
   },
 };
 
 export const Link: Story = {
   args: {
-    size: ButtonSize.Large,
-    type: ButtonType.Link,
+    size: "middle",
+    type:  "link",
     children: 'Link',
   },
 };

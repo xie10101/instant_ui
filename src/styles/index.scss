@@ -8,5 +8,9 @@
 // 主要是默认样式使用
 @use 'normalize' as *;
 @use 'mixins' as *;
+@use "animation" as *;
+@use "functions" as *;
+
+
 
 // 导入 - button 组件 的样式文件 ：

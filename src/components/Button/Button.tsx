@@ -8,25 +8,11 @@ import React from 'react';
 import classNames from 'classnames';
 import { ButtonHTMLAttributes } from 'react';
 import { AnchorHTMLAttributes } from 'react';
-
-import './_style.scss';
-export enum ButtonSize {
-  Large = 'large',
-  Small = 'small',
-}
-
-export enum ButtonType {
-  Primary = 'primary',
-  Success = 'success',
-  Danger = 'danger',
-  Warning = 'warning',
-  default = 'default',
-  Link = 'link',
-}
+import "./_style.scss"
 
 interface ButtonProps {
-  size?: ButtonSize; // 按钮大小
-  type?: ButtonType; // 按钮类型
+  size?:  'large'|'small'|'middle'| string; // 按钮大小
+  type?:'primary'|'success'|'danger'|'warning'|'default'|'link'| string; // 按钮类型
   children?: React.ReactNode;
   disabled?: boolean; // 是否禁用
   href?: string;
@@ -48,12 +34,11 @@ type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
 // }
 // 联合类型 可以是 a标签原生或者是 button 原生 props
 type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>;
-const ada="qeq";
-console.log(ada)
+
 const Button: React.FC<ButtonPropsPro> = (props: ButtonPropsPro) => {
   const {
     size,
-    type = ButtonType.default,
+    type = "default",
     children,
     disabled = false,
     href,
@@ -70,14 +55,14 @@ const Button: React.FC<ButtonPropsPro> = (props: ButtonPropsPro) => {
   const classes = classNames('btn', `${className}`, {
     [`btn-${size}`]: size,
     [`btn-${type}`]: type,
-    disabled: type === ButtonType.Link && disabled, //当且仅当 类型为链接 且 传递的disable Props 的值为 true时 表达值式返回值才为true
+    disabled: type === "link" && disabled, //当且仅当 类型为链接 且 传递的disable Props 的值为 true时 表达值式返回值才为true
   });
 
   // 在使用类型断言之前需要做到类型检查 确保 type为link 才可设置props --
   //  a标签属性
   // isAnchorProps(props)
   // "href" in 操作 判断属性存在行
-  if (props.type === ButtonType.Link && 'href' in props) {
+  if (props.type === "link" && 'href' in props) {
     return (
       <a
         className={classes}

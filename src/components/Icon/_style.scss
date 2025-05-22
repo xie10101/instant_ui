@@ -1,0 +1,10 @@
+
+// 对于 一组变量样式的使用 ： 可以使用循环的方式进行设置 
+
+
+// $theme- colors 遍历map 对象 
+@each $key ,$color in var.$theme-colors{
+    .icon-#{$key}{
+    color: $color;
+    }
+}

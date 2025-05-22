@@ -5,7 +5,8 @@ import './App.css';
 import Menu from './components/Menu/Menu';
 import MenuItem from './components/Menu/MenuItem';
 import SubMenu from './components/Menu/SubMenu';
-
+import Input from './components/Input/Input';
+import Icon from './components/Icon/Icon';
 function App(): JSX.Element {
   return (
     <>
@@ -38,6 +39,21 @@ function App(): JSX.Element {
         </SubMenu>
         <MenuItem>cool link</MenuItem>
       </Menu>
+      <Input placeholder='xxxx'size='large' ></Input>
+      <Input placeholder='xxxx'size='middle' ></Input>
+      <Input placeholder='xxxx'size='small' ></Input>
+      <Input placeholder='xxxx'disabled ></Input>
+     <Input  icon="search" ></Input>
+     {/* 前缀和后缀添加  */}
+     <Input prepend={<div>前缀</div>}  ></Input>
+     <Input append={<div>后缀</div>} ></Input>
+
+     <hr />
+     <div style={{color:'red'}}>
+      <Icon icon='ghost'></Icon>
+     </div>
+      <Icon icon='ghost' theme='primary'></Icon>    
+
 
       {/* <Button className='btn-test' id='btn-test' onClick={()=>{alert("123s")}}>Hello</Button>
       <Button size={ButtonSize.Large}  onClick={() => {alert("123")}}>Large</Button>

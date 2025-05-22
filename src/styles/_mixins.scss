@@ -67,3 +67,12 @@ $btn-border-width: var.$btn-border-width; // 边框宽度
     color: $hover-color;
   }
 }
+
+
+// input相关操作mixin 
+@mixin input-size($border-radius, $font-size, $padding-x, $padding-y)
+{
+  border-radius: $border-radius;
+  font-size: $font-size;
+  padding: $padding-y $padding-x; 
+}

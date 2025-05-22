@@ -2,4 +2,6 @@ node_modules
 dist
 *.min.css
 # .stylelintignore
-src/styles/_normalize.scss
+src/styles/_normalize.scss 
+
+src/components/**/*.scss 
