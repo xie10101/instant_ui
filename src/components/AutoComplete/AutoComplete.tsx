@@ -33,6 +33,8 @@ const AutoComplete :React.FC<AutoCompleteProps> = (props)=>  {
 
 const handleSelect = (value: string) => { 
     setInputValue(value);
+    setSuggestions([]);
+    // 需要使用时 - 传递 参数 - value
     if (onSelect) {
       onSelect(value);
     }
@@ -41,15 +43,17 @@ const handleSelect = (value: string) => {
   }
 //   查询后列表的函数生成 
      const generateDropdown = ()=>{ 
-//    return (
-//     // <div className="viking-auto-complete-dropdown">
-//     //   {options?.map((option) => (
-//     //     <div key={option} className="viking-auto-complete-dropdown-item">
-//     //       {option}
-//     //     </div>
-//     //   ))}
-//     </div>
-//   );  
+    //  map循环实现 - 列表生成  -- 当数组 为空时回调不执行 - 不进行渲染 ：
+  return ( 
+     <ul>
+    {suggestions.map((item, index) => {
+      return (
+        <li key={index} onClick={() => handleSelect(item)}>
+          {item}
+        </li>
+      );
+    }) 
+}     </ul>)
 }  
     
      return ( 
@@ -61,7 +65,7 @@ const handleSelect = (value: string) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
-            {generateDropdown()}
+            {(suggestions.length>0) && generateDropdown()}
             </div>
         </>
      );
