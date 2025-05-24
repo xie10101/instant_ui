@@ -1,0 +1,53 @@
+// .instant-auto-complete-item{
+//  width: 100%;
+//  padding: 5px ;
+//  cursor: pointer;
+// }
+
+// .instant-auto-complete-list{
+//     width: var.$input-max-width;
+//     display: flex;
+//     flex-direction: column;
+//     background-color: var.$input-bg;
+//     list-style: none;
+//     padding: 10px
+// }
+
+
+
+.instant-auto-complete {
+  position: relative;
+}
+.instant-auto-complete-list{
+  list-style:none;
+  padding-left: 0;
+  white-space: nowrap;
+  position: absolute;
+  background: var.$white;
+  z-index: 100;
+//   top: calc(100% + 8px);
+  left: 0;
+  border: var.$menu-border-width solid var.$menu-border-color;
+  box-shadow: var.$box-shadow;
+  width: 100%;
+  border-radius: var.$border-radius;
+  .suggstions-loading-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75px;
+  }
+  .instant-auto-complete-item{
+    padding: var.$menu-item-padding-y var.$menu-item-padding-x;
+    cursor: pointer;
+    transition: var.$menu-transition;
+    color: var.$body-color;
+    &.is-active {
+      background: var.$menu-item-active-color !important;
+      color: var.$white !important;
+    }
+    &:hover {
+      color: var.$menu-item-active-color !important;
+    }
+  }
+}
