@@ -113,19 +113,8 @@ type DataType = {
     // 设置一个函数专门处理- 异步数据的返回：？ -起始不用 
     // 用户希望该函数只做数据的返回- 不做模版样式的渲染
     const handleFilterOption = async  (query : string ) =>{
-   
+  
         //  返回值 -函数签名和实际定义的函数签名不一致 - 
-      // const data =  await   fetch(`https://api.github.com/search/users?q=${query}`)
-      //   .then(response => response.json())
-      //  .then(data => {
-      //    setTimeout(() => {
-      //   return data.items.map((item:any) => ({ value: item.login, id: item.id, url: item.url })); ;    
-      //   } ,1000) 
-      // })
-      //  .catch(error => {
-      //   console.error('Error:', error);
-      // })
-      //  return data ;
       try {
     // 1. 发起请求
     const response = await fetch(`https://api.github.com/search/users?q=${query}`);
@@ -139,7 +128,8 @@ type DataType = {
     const jsonData = await response.json();
     
     // 4. 添加延迟后返回处理后的数据
-    return new Promise((resolve) => {
+    // Promise 对象正确泛型使用 
+    return new Promise<ItemType<DataType>[]>((resolve) => {
       setTimeout(() => {
         resolve(
           jsonData.items.map((item: any) => ({
@@ -156,7 +146,7 @@ type DataType = {
     // 返回空数组或根据业务需求处理错误
     return [];
   }
-    }
+}
 
 
     /**
