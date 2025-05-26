@@ -7,7 +7,17 @@ import MenuItem from './components/Menu/MenuItem';
 import SubMenu from './components/Menu/SubMenu';
 import Input from './components/Input/Input';
 import Icon from './components/Icon/Icon';
+// import axios  from 'axios'; 
+import Upload from './components/Upload/Upload';
 function App(): JSX.Element {
+  // axios.get("https://jsonplaceholder.typicode.com/posts",{
+  //    headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   responseType: 'json',
+  // }).then((res) => {
+  //   console.log(res);
+  // })
   return (
     <>
       <Menu
@@ -53,8 +63,11 @@ function App(): JSX.Element {
       <Icon icon='ghost'></Icon>
      </div>
       <Icon icon='ghost' theme='primary'></Icon>    
+  
+     <Upload>
 
-
+     </Upload>
+         
       {/* <Button className='btn-test' id='btn-test' onClick={()=>{alert("123s")}}>Hello</Button>
       <Button size={ButtonSize.Large}  onClick={() => {alert("123")}}>Large</Button>
       <Button disabled={true}>disabled</Button>

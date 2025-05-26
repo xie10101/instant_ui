@@ -6,13 +6,18 @@
     <title>测试输入框 </title>
 </head>
 <body>
-    <div>
-        123123
-    </div>
-    <input type="text"style="width: 300px;height:10px;font-size: 26px;margin-top: 10px;" > 
-    <!-- 行内式元素  -->
-    <span>12312321</span>
-    <!-- 样式和div类似  -->
+    
+     <div>
+
+        <!-- 传递组件存在最基础的标签 ： 由enctype - 数据传输格式 - 设置 ， input type 设置 的两个要求   -->
+        <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" id="fileInput">   
+        <!--d -->
+        <button type="submit">上传</button>  
+        <!-- button仅针对该form容器  -->
+        </form>
+     </div>
+
 </body>
 <script>
 // 
