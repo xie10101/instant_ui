@@ -7,7 +7,7 @@ import './_style.scss';
 // FontAwesomeIconProps 配套Icon组件的props 属性 
 import classNames from "classnames";
 library.add(fas);  //整体导入使用 
-type ThemeProps = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'; 
+export type ThemeProps = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'; 
 
 export interface IconProps extends FontAwesomeIconProps{ 
      // 继承 FontAwesomeIconProps 组件的属性 包含 icon属性 - 通过以上注册就可以通过字符串形式进行使用 

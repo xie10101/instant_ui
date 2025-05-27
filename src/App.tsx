@@ -8,7 +8,8 @@ import SubMenu from './components/Menu/SubMenu';
 import Input from './components/Input/Input';
 import Icon from './components/Icon/Icon';
 // import axios  from 'axios'; 
-import Upload from './components/Upload/Upload';
+
+import Progress from './components/Progress/Progress';
 function App(): JSX.Element {
   // axios.get("https://jsonplaceholder.typicode.com/posts",{
   //    headers: {
@@ -20,6 +21,8 @@ function App(): JSX.Element {
   // })
   return (
     <>
+    <Progress  percent={28} showText={false}></Progress>
+
       <Menu
         style={{ width: '200px', height: '300px' }}
         id={'menu-test'}
@@ -63,10 +66,7 @@ function App(): JSX.Element {
       <Icon icon='ghost'></Icon>
      </div>
       <Icon icon='ghost' theme='primary'></Icon>    
-  
-     <Upload>
 
-     </Upload>
          
       {/* <Button className='btn-test' id='btn-test' onClick={()=>{alert("123s")}}>Hello</Button>
       <Button size={ButtonSize.Large}  onClick={() => {alert("123")}}>Large</Button>

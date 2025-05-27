@@ -1,0 +1,35 @@
+.instant-progress {
+  width: 100%;
+  box-sizing: border-box;
+
+.instant-progress-outer {
+
+    border-radius: var.$progress-border-radius;
+    background-color: var.$progress-bg;
+    overflow: hidden;
+    position: relative;
+  }
+.instant-progress-inner {
+ position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    border-radius: var.$progress-border-radius;
+    line-height: 1;
+    transition: var.$progress-bar-transition;
+    .inner-text {
+      color: var.$progress-bar-color;
+      font-size: var.$progress-font-size;
+      margin: 0 5px;  
+    }
+  }
+//   遍历使用 
+  @each $key, $val in var.$theme-colors {
+    .instant-progress-#{$key} {
+      background-color: $val;
+    }
+  }
+}

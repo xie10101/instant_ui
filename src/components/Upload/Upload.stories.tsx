@@ -32,6 +32,12 @@ export const Default: Story = {
     },
     onError:(error,file)=>{ // 上传失败
       console.log(error,file)
+    },
+    onChange:(file)=>{ // 上传状态改变
+      console.log(file,"change")
+    },
+    onRemove:(file)=>{ // 删除文件
+      console.log(file,"remove")
     }
   },
   render: (args)=>{ 
@@ -83,3 +89,4 @@ export const beforeTest2 : Story = {
     return <Upload {...args} ></Upload>
   }
 }
+
