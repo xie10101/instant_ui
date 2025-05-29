@@ -29,8 +29,11 @@ const AutoComplete=<T=object>(props:AutoCompleteProps<T>)=>  {
      const [loading, setLoading] = useState(false); // 加载状态
      const   debounceData = useDebounce(inputValue, 300); // 防抖后的值 
      const [heightIndex, setHeightIndex] = useState(0); //高亮选中值绑定 
-     const contentRef = useRef<HTMLElement>(null); 
+     const contentRef = useRef<HTMLDivElement>(null); 
      const selectedRef = useRef<boolean>(false); // 选中项的引用 
+     const inputRef = useRef<HTMLInputElement>(null);
+
+     console.log(inputRef.current)
 useClickOut(contentRef , () => {
     setSuggestions([]); // 点击外部时清空建议列表
 })   
@@ -83,7 +86,7 @@ const handleSelect = (item: ItemType<T>) => {
     setHeightIndex(index); 
  }
 
- const inputRef = useRef<HTMLInputElement>(null);
+//  const inputRef = useRef<HTMLInputElement>(null);
   // 处理键盘事件 - 选择列表项
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // 取消输入框焦点 ：
@@ -138,7 +141,7 @@ const handleSelect = (item: ItemType<T>) => {
         <>
             <div className="instant-auto-complete" ref={contentRef}>
             <Input
-                ref={inputRef}
+               ref={inputRef}
                 {...restProps}
                 value={inputValue}
                 onChange={handleChange}

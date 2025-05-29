@@ -14,14 +14,13 @@
 
  .instant-upload-list-item{
     width: var.$uploadlist-item-width;
-    display: flex;
+    display: flex; // flex 属性导致 其子块被重新计算样式- inline block 
     align-items: center;
     justify-content: space-between; // 针对 span是否起效 -flex不起效果;
-    // box-shadow: var.$uploadlist-box-shadow;
-    border-bottom: var.$uploadlist-border;
+    border-bottom: var.$uploadlist-border ;
     padding: 0px 10px;
     .instant-upload-list-item-remove{
-    width: 2em;
+    width:2em;
     font-size: 16px;
     color:rgb(170, 165, 165) ; 
      opacity: 0;
@@ -38,16 +37,5 @@
 
 .instant-upload-list-item-status{
     width: 2em;
-
-
 }
 
-
-/*
-$uploadlist-font-size: $font-size-base;
-$uploadlist-line-height: 2.5em;
-$uploadlist-border: 1px solid $gray-500;
-$uploadlist-box-shadow: 0 1px 1px $gray-300;
-$uploadlist-icon-size: $font-size-base;
-$uploadlist-item-width: 15rem;
-*/

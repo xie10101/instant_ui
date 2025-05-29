@@ -3,6 +3,8 @@
 
 */
 
+//     // "build": "tsc -b && vite build",
+
 @use 'variables' as *;
 
 // 主要是默认样式使用
@@ -10,7 +12,12 @@
 @use 'mixins' as *;
 @use "animation" as *;
 @use "functions" as *;
-
-
+@use "../components/AutoComplete/style" as *;
+@use "../components/Button/style" as *;
+@use "../components/Input/style" as *;
+@use "../components/Progress/style" as *;
+@use "../components/Menu/style" as *;
+@use "../components/Upload/style" as *;
+@use "../components/Icon/style" as *;
 
 // 导入 - button 组件 的样式文件 ：

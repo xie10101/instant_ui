@@ -1,5 +1,5 @@
 {
-  "files": [],
+  // "files": [],
   "compilerOptions": {
     "types": ["jest", "@types/jest", "@testing-library/jest-dom"],
     "esModuleInterop": true, // 允许使用 import x from 'module' 导入模块 --针对 commonjs 导出库
@@ -8,11 +8,15 @@
     "jsx": "react-jsx", // 或 "react" 17版本之后 jsx转换方式得到更新需要 显示引入 React进行jsx转换 - creacteElement
     "jsxImportSource": "react", // 如果使用 React 17+ 的新 JSX 转换
     "target": "ES2016", // 或 "ESNext"
-    "lib": ["ES2016", "DOM"] // 添加 ES2016 及以上版本
+    "lib": ["ES2016", "DOM"],// 添加 ES2016 及以上版本
+    "noImplicitAny": true,    // 禁止隐式 any
+    "strict": true,           // 启用所有严格检查（包含 noImplicitAny）
+    "skipLibCheck": true,      // 可选：跳过库文件的类型检查
+    "noEmit": true
   },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ]
-  //
+  
 }

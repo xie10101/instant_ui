@@ -29,12 +29,12 @@ interface MenuContextType {
 }
 
 // 获取原生的ul 类型 ：
-export type Props = React.HTMLAttributes<HTMLUListElement> & MenuProps;
+export type MenuPropsPro = React.HTMLAttributes<HTMLUListElement> & MenuProps;
 
 export const MenuContext = React.createContext<MenuContextType>({
   index: '0',
 });
-const Menu: React.FC<Props> = (props) => {
+const Menu: React.FC<MenuPropsPro> = (props) => {
   const {
     className,
     style,

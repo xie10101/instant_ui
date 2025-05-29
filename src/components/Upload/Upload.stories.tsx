@@ -38,14 +38,14 @@ export const Default: Story = {
     },
     onRemove:(file)=>{ // 删除文件
       console.log(file,"remove")
-    }
+    },
   },
   render: (args)=>{ 
     return <Upload {...args} ></Upload>
   } 
 }
 
-const beforeUploadHandle1  = (file:File)=>{ // 上传前的回调函数 ：
+const beforeUploadHandle1  = (file:any)=>{ // 上传前的回调函数 ：
   // 验证文件大小 ：
   if(file.size > 1024  * 5) // 5k
   {
@@ -70,7 +70,7 @@ export const beforeTest : Story = {
 
 
 
- const beforeUploadHandle2  = (file:File)=>{ // 上传前的回调函数 ：
+ const beforeUploadHandle2  = (file:any)=>{ // 上传前的回调函数 ：
      const fileData = new File([file],`${Date.now()}-${file.name}`,{type:file.type}); // 重命名文件 ： 
   return Promise.resolve(fileData); // 上传成功
 }
@@ -90,3 +90,29 @@ export const beforeTest2 : Story = {
   }
 }
 
+
+export  const multiOrAccept: Story = {
+  args: { // 传入组件的props参数
+    action:"https://jsonplaceholder.typicode.com/posts/",
+    onProgress:(percent,file)=>{ // 上传进度
+      console.log(percent,file)
+    },
+    onSuccess:(data,file)=>{ // 上传成功
+      console.log(data,file)
+    },
+    onError:(error,file)=>{ // 上传失败
+      console.log(error,file)
+    },
+    onChange:(file)=>{ // 上传状态改变
+      console.log(file,"change")
+    },
+    onRemove:(file)=>{ // 删除文件
+      console.log(file,"remove")
+    },
+        multiple:true,
+    accept:"image/*",
+  },
+  render: (args)=>{ 
+    return <Upload {...args} ></Upload>
+  } 
+}

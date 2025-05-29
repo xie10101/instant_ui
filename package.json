@@ -1,11 +1,16 @@
 {
   "name": "instantui",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./src/main.tsx",
+  "module": "./src/main.tsx",
+  "description": "A  React UI library for building modern web applications.",
+  "author": "ZiXuan",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+
     "preview": "vite preview",
     "test": "jest --watchAll",
     "storybook": "storybook dev -p 6006",
@@ -19,7 +24,10 @@
     "lint:strict": "eslint --max-warnings=0 .",
     "lint:css": "stylelint \"src/**/*.{css,scss}\"",
     "lint:css:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
-    "commit": "cz"
+    "commit": "cz",
+    "build-ts":"tsc -p tsconfig.build.json",
+    "build-css": "sass src/styles/index.scss build/styles/index.css",
+    "build": "npm run build-ts && npm run build-css"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

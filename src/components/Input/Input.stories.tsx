@@ -3,7 +3,7 @@
 import Input from "./Input";
 import { useState } from "react";
 import { Meta, StoryObj } from '@storybook/react';
-import { InputProps } from "./Input";
+import { InputPropsPro } from "./Input";
  const inputMeta: Meta<typeof Input> = {
  title:"输入框",
   argTypes: {
@@ -32,7 +32,7 @@ import { InputProps } from "./Input";
  type Story = StoryObj<typeof Input>;
 
 // 单独创建一个函数式的组件  -使用 render引入自定义组件；
-const ControlInput = (args: InputProps) => {
+const ControlInput = (args: InputPropsPro) => {
   // 函数作为函数式组件使用时 - 函数名/组件名需要大写/ 驼峰 React可以识别？  
   const [value, setValue] = useState("123");
   return <Input value={value}  onChange={(e)=>{setValue(e.target.value)}} {...args} />;

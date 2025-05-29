@@ -43,5 +43,32 @@ return  function(){
 const xxx = test(add,1000)
 xxx();
 
+
+let str = "test";
+let arr= str.split("");  //直接使用 
+let arr2=str.split();
+console.log(arr);
+console.log(arr2);
+
+let arrtest = [1,2,3,4];
+let str2 = arrtest.join(""); //1234
+let str3 = arrtest.join(); //1,2,3,4 / 省略使用 , 替代 
+let str4 = arrtest.join(","); //1 2 3 4
+console.log(str2);
+console.log(str3);
+console.log(str4);
+
+let arr3 = [...str2]; 
+console.log(arr3);
+
+// 根据性能优先 ： 
+
+
+let arr4 = Array.from(str2); 
+console.log(arr4); // 可以实现 
+let str5= arr4.toString();
+console.log(str5);  //  1,2,3,4, 
+
+
 </script>
 </html>

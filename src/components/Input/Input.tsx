@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { forwardRef } from "react";
 import classNames from "classnames";
 import "./_style.scss"
 import Icon from "./../Icon/Icon"
 import {IconProp} from "@fortawesome/fontawesome-svg-core"  // Font 结构出icon字符串所属类型 - 并非 string 
 //   获取 原生Input 类型 ：
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">{
+export interface InputProps  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">{
     /**设置input大小 ： large middle small*/ 
    size? : 'large' | 'middle' | 'small' ;
     /**是否禁用 ： true 禁用 false 启用 */
@@ -23,6 +23,8 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
    placeholder?: string ;
 }
 
+// export type InputPropsPro = InputProps &  React.RefAttributes<HTMLInputElement>
+
 // 获取表单标签原生属性类型：
 // type props = ComponentProps<"input">  
 // type InputPropsNative = React.InputHTMLAttributes<HTMLInputElement> 
@@ -40,8 +42,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
  * 
  * 支持 HTMLInput 的所有基本属性
  */
-const Input :FC<InputProps> = (props) => {
-  // ref 的使用 ？ 
+const Input =  forwardRef<HTMLInputElement, InputProps>((props,ref) => {
     const { size="middle",disabled=false,prepend,append,icon,style,className,placeholder,...restprops} = props;
 
     // 其中 size-用于样式不传递给子组件 
@@ -78,13 +79,14 @@ const  fixValue= ()=> props.value !== undefined ? props.value :""
               <Icon  icon={icon}  title={`title-${icon}`}></Icon>
             </div>
           )}
-          <input {...restprops} className="instant-input-inner" placeholder= {placeholder} disabled={disabled} >
+          <input {...restprops} ref= {ref} className="instant-input-inner" placeholder= {placeholder} disabled={disabled} >
           </input>
           {append && <div className="instant-input-group-append">{append}</div>}
         </div>
         </> 
       );
 }
+)
  
 export default Input ;
 
