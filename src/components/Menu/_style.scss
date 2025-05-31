@@ -50,24 +50,23 @@
       transition: var.$menu-transition;
       align-items: center;
       // 添加图标样式 ：
-      .icon-chevron{
+      .icon-chevron {
         margin-left: 5px;
         font-size: 13px;
         transition: transform 0.25s ease-in-out;
       }
 
-      
       &.is-active,
       &:hover {
         color: var.$menu-item-active-color;
-        .icon-chevron{
+        .icon-chevron {
           transform: rotate(180deg);
         }
       }
     }
 
     .sub-menu-ul {
-      border:0px solid var.$menu-border-color;
+      border: 0px solid var.$menu-border-color;
       box-shadow: var.$menu-box-shadow;
       list-style: none;
       // max-height: 0;
@@ -78,7 +77,7 @@
       padding: 0;
       position: absolute;
       transform-origin: top;
-      transition:  0.5s ease;
+      transition: 0.5s ease;
       z-index: 99;
       .menu-item {
         border-left: var.$menu-item-active-border-width solid transparent;
@@ -100,14 +99,15 @@
 }
 
 .is-vertical {
- .icon-chevron{
-   transform: rotate(0deg)!important;  
- }
+  .icon-chevron {
+    transform: rotate(0deg) !important;
+  }
 }
-.is-vertical.is-opened {  //同时存在两个状态的subMenu选中该样式 ;
-   .icon-chevron{
-   transform: rotate(180deg)!important;  
- }
+.is-vertical.is-opened {
+  //同时存在两个状态的subMenu选中该样式 ;
+  .icon-chevron {
+    transform: rotate(180deg) !important;
+  }
 }
 
 .menu-vertical {
@@ -151,17 +151,19 @@
 }
 
 .zoom-in-top-enter {
- opacity: 0;
- transform: scaleY(0); // 初始状态下缩小
- transform-origin: top; // 从顶部开始缩放
- transition: opacity 0.3s ease, transform 0.3s ease; // 添加过渡效果
+  opacity: 0;
+  transform: scaleY(0); // 初始状态下缩小
+  transform-origin: top; // 从顶部开始缩放
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease; // 添加过渡效果
 }
 
 .zoom-in-top-enter-active {
- opacity: 1;
- transform: scaleY(1); // 最终状态下恢复正常大小
- transform-origin: center top; 
- transition:  transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s ;
+  opacity: 1;
+  transform: scaleY(1); // 最终状态下恢复正常大小
+  transform-origin: center top;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
 }
 
 .zoom-in-top-exit {
@@ -169,10 +171,12 @@
 }
 
 .zoom-in-top-exit-active {
-opacity: 0;
- transform: scaleY(0); // 初始状态下缩小
-  transform-origin: center top; 
- transition: opacity 0.3s ease, transform 0.3s ease; // 添加过渡效果
+  opacity: 0;
+  transform: scaleY(0); // 初始状态下缩小
+  transform-origin: center top;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease; // 添加过渡效果
 }
 
 // 此处盒子边框计算没有使用 border-box - padding设置撑开盒子，设置边框和阴影 flex布局效果

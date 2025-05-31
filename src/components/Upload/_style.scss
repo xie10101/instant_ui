@@ -1,41 +1,40 @@
-.instant-upload-input{
-    display: none;
+.instant-upload-input {
+  display: none;
 }
 
-.instant-upload-list{
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-    font-size: var.$uploadlist-font-size; 
-    line-height: var.$uploadlist-line-height;
+.instant-upload-list {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  font-size: var.$uploadlist-font-size;
+  line-height: var.$uploadlist-line-height;
 
- .instant-upload-list-item{
+  .instant-upload-list-item {
     width: var.$uploadlist-item-width;
-    display: flex; // flex 属性导致 其子块被重新计算样式- inline block 
+    display: flex; // flex 属性导致 其子块被重新计算样式- inline block
     align-items: center;
     justify-content: space-between; // 针对 span是否起效 -flex不起效果;
-    border-bottom: var.$uploadlist-border ;
+    border-bottom: var.$uploadlist-border;
     padding: 0px 10px;
-    .instant-upload-list-item-remove{
-    width:2em;
-    font-size: 16px;
-    color:rgb(170, 165, 165) ; 
-     opacity: 0;
-     transition: all 0.3s ease-in-out;
-         text-align: center;
-   }
-    &:hover{
-        .instant-upload-list-item-remove{
-         opacity: 1;
-        }
+    .instant-upload-list-item-remove {
+      width: 2em;
+      font-size: 16px;
+      color: rgb(170, 165, 165);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+      text-align: center;
     }
-}
+    &:hover {
+      .instant-upload-list-item-remove {
+        opacity: 1;
+      }
+    }
+  }
 }
 
-.instant-upload-list-item-status{
-    width: 2em;
+.instant-upload-list-item-status {
+  width: 2em;
 }
-

@@ -13,13 +13,11 @@
 //     padding: 10px
 // }
 
-
-
 .instant-auto-complete {
   position: relative;
 }
-.instant-auto-complete-list{
-  list-style:none;
+.instant-auto-complete-list {
+  list-style: none;
   padding-left: 0;
   white-space: nowrap;
   position: absolute;
@@ -37,7 +35,7 @@
     justify-content: center;
     min-height: 75px;
   }
-  .instant-auto-complete-item{
+  .instant-auto-complete-item {
     padding: var.$menu-item-padding-y var.$menu-item-padding-x;
     cursor: pointer;
     transition: var.$menu-transition;
@@ -49,13 +47,13 @@
     &:hover {
       color: var.$menu-item-active-color !important;
     }
-      &:hover.is-active {
+    &:hover.is-active {
       color: var.$white !important;
     }
   }
 }
 
-.is-active{
+.is-active {
   background: var.$menu-item-active-color !important;
   color: var.$white !important;
 }

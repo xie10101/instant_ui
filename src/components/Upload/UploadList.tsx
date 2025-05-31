@@ -23,7 +23,6 @@ const UploadList: FC<UploadListProps> = (props) => {
           (
             file // 遍历文件列表 ：
           ) => (
-          
             <div key={file.uid}>
               <li className="instant-upload-list-item">
                 <span style={{ flex: 1 }}>

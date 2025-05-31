@@ -12,9 +12,9 @@ const defaultProps = {
  *
  */
 const test1Props = {
-  type: "primary",
+  type: 'primary',
   className: 'test',
-  size:"large",
+  size: 'large',
 };
 const disabledProps = {
   disabled: true,

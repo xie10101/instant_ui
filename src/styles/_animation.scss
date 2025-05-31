@@ -1,16 +1,18 @@
 // 添加动画样式 ：
 .zoom-in-top-enter {
- opacity: 0;
- transform: scaleY(0); // 初始状态下缩小
- transform-origin: top; // 从顶部开始缩放
- transition: opacity 0.3s ease, transform 0.3s ease; // 添加过渡效果
+  opacity: 0;
+  transform: scaleY(0); // 初始状态下缩小
+  transform-origin: top; // 从顶部开始缩放
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease; // 添加过渡效果
 }
 
 .zoom-in-top-enter-active {
- opacity: 1;
- transform: scaleY(1); // 最终状态下恢复正常大小
- transform-origin: center top; 
- transition:  transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s ;
+  opacity: 1;
+  transform: scaleY(1); // 最终状态下恢复正常大小
+  transform-origin: center top;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
 }
 
 .zoom-in-top-exit {
@@ -18,8 +20,10 @@
 }
 
 .zoom-in-top-exit-active {
-opacity: 0;
- transform: scaleY(0); // 初始状态下缩小
-  transform-origin: center top; 
- transition: opacity 0.3s ease, transform 0.3s ease; // 添加过渡效果
+  opacity: 0;
+  transform: scaleY(0); // 初始状态下缩小
+  transform-origin: center top;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease; // 添加过渡效果
 }

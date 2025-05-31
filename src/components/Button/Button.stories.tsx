@@ -9,7 +9,7 @@ const buttonMeta: Meta<typeof Button> = {
   component: Button, //组件来源
   argTypes: {
     size: {
-      options: ['large', 'small'," middle"], //底层组件参数选项
+      options: ['large', 'small', ' middle'], //底层组件参数选项
       control: { type: 'radio' },
     },
   },
@@ -34,24 +34,24 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    size: "middle",
-    type: "primary",
+    size: 'middle',
+    type: 'primary',
     children: 'Primary',
   },
 };
 
 export const Danger: Story = {
   args: {
-    size: "middle",
-    type: "danger",
+    size: 'middle',
+    type: 'danger',
     children: 'Danger',
   },
 };
 
 export const Link: Story = {
   args: {
-    size: "middle",
-    type:  "link",
+    size: 'middle',
+    type: 'link',
     children: 'Link',
   },
 };

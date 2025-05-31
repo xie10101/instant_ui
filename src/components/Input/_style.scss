@@ -26,7 +26,7 @@
     box-shadow: var.$input-focus-box-shadow;
   }
 
-    .instant-input-icon {
+  .instant-input-icon {
     position: absolute;
     height: 100%;
     width: 35px;
@@ -50,7 +50,7 @@
   );
 }
 .input-small {
-      @include input-size(
+  @include input-size(
     var.$input-border-radius-sm,
     var.$input-font-size-sm,
     var.$input-padding-x-sm,
@@ -58,19 +58,19 @@
   );
 }
 
-.input-disabled{
+.input-disabled {
   background-color: #f7f7f7;
-  &:focus{ 
-   box-shadow: none;
-   border-color: transparent;
-   }
-   &:hover{ 
-   box-shadow: none;
-  border-color: transparent;
-   }
+  &:focus {
+    box-shadow: none;
+    border-color: transparent;
+  }
+  &:hover {
+    box-shadow: none;
+    border-color: transparent;
+  }
 }
 
-.instant-input-icon+.instant-input-inner {
+.instant-input-icon + .instant-input-inner {
   padding-right: 35px;
 }
 .instant-input-inner {
@@ -84,9 +84,9 @@
   &:focus {
     outline: 0;
   }
-  &[disabled]{
+  &[disabled] {
     background-color: #f7f7f7;
-    cursor: not-allowed; 
+    cursor: not-allowed;
   }
 }
 // 样式可能合理；

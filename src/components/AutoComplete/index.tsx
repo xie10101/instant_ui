@@ -1,2 +1,2 @@
-import AutoComplete from "./AutoComplete";
-export default AutoComplete; 
+import AutoComplete from './AutoComplete';
+export default AutoComplete;

@@ -1,7 +1,7 @@
 // 对菜单基础功能添加测试：
 import { fireEvent, render, cleanup } from '@testing-library/react';
 import { RenderResult } from '@testing-library/react'; // 导入测试库的类型定义，用于定义渲染结果的类型。
-import Menu, { Props } from './Menu';
+import Menu, { MenuPropsPro } from './Menu';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 /**
@@ -14,18 +14,18 @@ import SubMenu from './SubMenu';
  */
 
 // 设置多个测试Props ：
-const defaultProps: Props = {
+const defaultProps: MenuPropsPro = {
   activeIndex: '0',
   className: 'test',
   onSelect: jest.fn(),
 };
-const verticalProps: Props = {
+const verticalProps: MenuPropsPro = {
   activeIndex: '0',
   mode: 'vertical',
   onSelect: jest.fn(),
 };
 // 设置一个集成后的Menu组件
-const NiceMenu = (props: Props) => {
+const NiceMenu = (props: MenuPropsPro) => {
   return (
     <Menu {...props}>
       <MenuItem>active</MenuItem>

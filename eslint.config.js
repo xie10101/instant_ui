@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'storybook-static'] },
   {
     //继承预设的规则集
     extends: [js.configs.recommended, ...tseslint.configs.recommended], //扩展 设置 对于js。、ts的推荐校验规则
@@ -26,7 +26,7 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-       '@typescript-eslint/no-explicit-any': 'off' // 允许any显示设置 
+      '@typescript-eslint/no-explicit-any': 'off', // 允许any显示设置
     },
   }
 );

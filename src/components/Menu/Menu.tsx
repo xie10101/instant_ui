@@ -5,7 +5,7 @@ type onSelectType = (
   event?: React.SyntheticEvent<HTMLUListElement>
 ) => void;
 type Mode = 'horizontal' | 'vertical';
-import "./_style.scss"
+import './_style.scss';
 import { MenuItemProps } from './MenuItem';
 export interface MenuProps {
   className?: string;
