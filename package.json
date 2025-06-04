@@ -7,9 +7,9 @@
   "description": "A  React UI library for building modern web applications.",
   "author": "ZiXuan",
   "license": "MIT",
-   "repository": {
+  "repository": {
     "type": "git",
-    "url":"git+https://gitee.com/nie-li-xie-zi/instant-ui_project"
+    "url": "git+https://gitee.com/nie-li-xie-zi/instant-ui_project"
   },
   "scripts": {
     "dev": "vite",
@@ -19,7 +19,6 @@
     "test:nowatch": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write --loglevel warn .",
@@ -31,7 +30,8 @@
     "commit": "cz",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "sass src/styles/index.scss build/styles/index.css",
-    "prepublish": "npm run test:nowatch && npm  run lint:strict && npm run format:fix && npm run build"
+    "prepublish": "npm run test:nowatch && npm  run lint:strict && npm run format:fix && npm run build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -45,13 +45,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx commit --hook || true",
-      "pre-commit": "npm run test && npm run lint:strict && npm run format:fix",
-      "pre-push": "npm run test && npm run lint:strict && npm run format:fix"
-    }
-  },
+  "husky": {},
   "lint-staged": {
     "*.{ts,tsx,js,jsx,cjs,mjs,vue}": "eslint --fix",
     "*.{vue,css,scss,less,styl}": "stylelint --fix",
