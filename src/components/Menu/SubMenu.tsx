@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { Children, cloneElement, ReactElement } from 'react';
 import { MenuItemProps } from './MenuItem';
 import { useState, useRef } from 'react';
-import { MenuContext } from './Menu';
+import { MenuContext } from './MenuContext';
 import Icon from '../Icon/Icon';
 import { CSSTransition } from 'react-transition-group';
 import '../../styles/_animation.scss';

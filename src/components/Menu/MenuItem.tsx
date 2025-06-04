@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
-import { MenuContext } from './Menu';
+import { MenuContext } from './MenuContext';
 export interface MenuItemProps {
   className?: string;
   style?: React.CSSProperties;

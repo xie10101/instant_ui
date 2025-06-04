@@ -1,15 +1,19 @@
 {
   "name": "@xiex11/instant-ui",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "type": "module",
-  "main": "./src/main.tsx",
-  "module": "./src/main.tsx",
+  "main": "dist/instant-ui.js",
+  "module": "dist/instant-ui.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "description": "A  React UI library for building modern web applications.",
   "author": "ZiXuan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/nie-li-xie-zi/instant-ui_project"
+    "url": "https://gitee.com/nie-li-xie-zi/instant-ui_project"
   },
   "scripts": {
     "dev": "vite",
@@ -42,8 +46,8 @@
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "husky": {},
   "lint-staged": {
@@ -55,6 +59,7 @@
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/js": "^9.22.0",
     "@jest/globals": "^29.7.0",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-onboarding": "^8.6.14",
     "@storybook/blocks": "^8.6.14",

@@ -1,1 +1,3 @@
-"npm run test:nowatch && npm run lint:strict && npm run format:fix"
+npm run test:nowatch 
+npm run lint:strict 
+npm run format:fix

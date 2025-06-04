@@ -1,5 +1,6 @@
 import React, { Children, cloneElement, ReactElement } from 'react'; //
 import classNames from 'classnames';
+import { MenuContext, MenuContextType } from './MenuContext';
 type onSelectType = (
   selectedKey: string,
   event?: React.SyntheticEvent<HTMLUListElement>
@@ -20,20 +21,9 @@ export interface MenuProps {
   defaultOpenSubMenus?: string[];
 }
 
-//context 传递的类型设置 ：
-interface MenuContextType {
-  index: string; // 索引值 ： 用于设置激活样式;
-  onSelect?: onSelectType; // 对于该回调函数的执行处理？
-  mode?: Mode;
-  defaultOpenSubMenus?: string[];
-}
-
 // 获取原生的ul 类型 ：
 export type MenuPropsPro = React.HTMLAttributes<HTMLUListElement> & MenuProps;
 
-export const MenuContext = React.createContext<MenuContextType>({
-  index: '0',
-});
 const Menu: React.FC<MenuPropsPro> = (props) => {
   const {
     className,
