@@ -1,22 +1,26 @@
 {
   "compilerOptions": {
-    "outDir": "./build", // 输出目录
     "module": "ESNext", // 最新模块编译方式
-    "target": "ES5", // 目标编译环境
-    "declaration": true, // 生成声明文件
-    "jsx": "react-jsx", // jsx 语法 -- react 可以代替 jsx 语法编译
     "types": ["jest", "@testing-library/jest-dom"], // 显式声明需要的全局类型
-    "moduleResolution": "Node",
+    "moduleResolution": "Node", // 模块查找解析方式
     "esModuleInterop": true, // 允许使用 import x from 'module' 导入模块 --针对 commonjs 导出库
     //允许 TypeScript 更自然地处理 CommonJS 模块 将common导出进行 自动编译辅助 处理
     "allowSyntheticDefaultImports": true, // 闪避 类型检查
+    "jsx": "react-jsx", // 或 "react" 17版本之后 jsx转换方式得到更新需要 显示引入 React进行jsx转换 - creacteElement
     "jsxImportSource": "react", // 如果使用 React 17+ 的新 JSX 转换
+    "target": "ES2016", // 或 "ESNext"
     "lib": ["ES2016", "DOM"], // 添加 ES2016 及以上版本
     "noImplicitAny": true, // 禁止隐式 any
     "strict": true, // 启用所有严格检查（包含 noImplicitAny）
-    "skipLibCheck": true // 可选：跳过库文件的类型检查
+    "skipLibCheck": true, // 可选：跳过库文件的类型检查
+    "noEmit": true, // 不生成编译后的文件-js
+    "declaration": true, // 生成 .d.ts 类型声明文件
+    "declarationDir": "dist/types", // 类型文件输出目录,
+    "isolatedModules": true,// 每个文件作为单独的模块（禁用全局作用域）,
+    "outDir": "dist",            // 输出目录
+    "rootDir": "src",            // 必须指定源码目录
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"],
-
-  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"] // 此部分文件只进行开发时的类型检测 - 不进行编译 - 也不包含在最后的打包中个？
+  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"] 
+  // 此部分文件不进行开发时的类型检测 - 不进行编译 - 也不包含在最后的打包中
 }

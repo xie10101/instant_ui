@@ -1,3 +1,4 @@
+@use "../../styles/variables.scss" as var;
 .menu {
   border-bottom: var.$menu-border-width solid var.$menu-border-color;
   box-shadow: var.$menu-box-shadow;

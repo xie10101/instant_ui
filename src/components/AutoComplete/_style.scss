@@ -1,18 +1,4 @@
-// .instant-auto-complete-item{
-//  width: 100%;
-//  padding: 5px ;
-//  cursor: pointer;
-// }
-
-// .instant-auto-complete-list{
-//     width: var.$input-max-width;
-//     display: flex;
-//     flex-direction: column;
-//     background-color: var.$input-bg;
-//     list-style: none;
-//     padding: 10px
-// }
-
+@use "../../styles/variables.scss" as var;
 .instant-auto-complete {
   position: relative;
 }

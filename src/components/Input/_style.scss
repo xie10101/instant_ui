@@ -1,4 +1,5 @@
 @use '../../styles/mixins' as *;
+@use "../../styles/variables.scss" as var;
 .instant-input-wrapper {
   // 从内部到外部 的样式设置 ：宽高 - 以浏览器或者 设置的normalize.css文件为基准处理
   //   font-size ... bg  line-height: border  border-radius padding - ;
