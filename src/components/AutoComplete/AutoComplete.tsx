@@ -6,8 +6,10 @@ import Icon from '../Icon/Icon';
 import useDebounce from '../../hooks/UseDebouce';
 import classNames from 'classnames';
 import useClickOut from '../../hooks/UseClickOut';
-export interface AutoCompleteProps<T = object>
-  extends Omit<InputProps, 'onSelect'> {
+export interface AutoCompleteProps<T = object> extends Omit<
+  InputProps,
+  'onSelect'
+> {
   value?: string;
   onSelect?: (value: ItemType<T>) => void;
   filterOption?: (inputValue: string) => ItemType<T>[] | Promise<ItemType<T>[]>; //输入框内容作为参数传给用户进行处理-返回值在组件内部处理

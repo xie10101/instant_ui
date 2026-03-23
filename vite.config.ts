@@ -17,9 +17,7 @@ export default defineConfig({
     //   rollupTypes: true // 使用Rollup打包类型
     // })
   ],
-  build: {
-
-  },
+  build: {},
   css: {
     preprocessorOptions: {
       scss: {

@@ -4,8 +4,10 @@ import './_style.scss';
 import Icon from './../Icon/Icon';
 import { IconProp } from '@fortawesome/fontawesome-svg-core'; // Font 结构出icon字符串所属类型 - 并非 string
 //   获取 原生Input 类型 ：
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size'
+> {
   /**设置input大小 ： large middle small*/
   size?: 'large' | 'middle' | 'small';
   /**是否禁用 ： true 禁用 false 启用 */

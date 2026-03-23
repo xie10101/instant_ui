@@ -1,7 +1,7 @@
 // 检查是否可以使用已经定义的scss变量
 // 只有引入才能使用 - 可以进行全局引入
 @use '../../styles/mixins' as *; // 引入mixins.scss文件
-@use "../../styles/variables.scss" as var;
+@use '../../styles/variables.scss' as var;
 .btn {
   background-image: none;
   border: var.$btn-border-width solid transparent;

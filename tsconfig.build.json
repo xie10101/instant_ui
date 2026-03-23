@@ -16,11 +16,11 @@
     "noEmit": true, // 不生成编译后的文件-js
     "declaration": true, // 生成 .d.ts 类型声明文件
     "declarationDir": "dist/types", // 类型文件输出目录,
-    "isolatedModules": true,// 每个文件作为单独的模块（禁用全局作用域）,
-    "outDir": "dist",            // 输出目录
-    "rootDir": "src",            // 必须指定源码目录
+    "isolatedModules": true, // 每个文件作为单独的模块（禁用全局作用域）,
+    "outDir": "dist", // 输出目录
+    "rootDir": "src" // 必须指定源码目录
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"],
-  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"] 
+  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"]
   // 此部分文件不进行开发时的类型检测 - 不进行编译 - 也不包含在最后的打包中
 }
