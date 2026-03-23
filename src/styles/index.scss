@@ -1,9 +1,5 @@
-/* scss文件之间导入文件的语法 ： 
-@import "
-
-*/
-
-//     // "build": "tsc -b && vite build",
+/* scss文件之间导入文件的语法 ：  @import " */
+// "build": "tsc -b && vite build",
 
 @use 'variables' ;
 

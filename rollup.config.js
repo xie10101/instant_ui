@@ -19,27 +19,25 @@ const config = {
     {
       file: 'dist/index.esm.js',
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
     },
 
     {
-      
       file: 'dist/index.umd.js',
       format: 'umd',
       name: 'instant-ui', // 全局变量名
-      sourcemap: true
-    },  
-
+      sourcemap: true,
+    },
   ],
   external: ['react', 'react-dom'], // 外部化依赖
   plugins: [
-    nodeResolve(), 
+    nodeResolve(),
     json(),
     resolve(),
     commonjs(),
     typescript({
       tsconfig: './tsconfig.build.json',
-      declaration: false // 由 rollup-plugin-dts 单独处理
+      declaration: false, // 由 rollup-plugin-dts 单独处理
     }),
     postcss({
       modules: true, // 启用 CSS Modules
@@ -48,12 +46,12 @@ const config = {
       use: {
         sass: {
           implementation: sassImplementation, // 使用 Dart Sass
-        }
+        },
       },
       extract: true, // 提取为独立 CSS 文件
-      sourceMap: true // 可选：生成 sourcemap
+      sourceMap: true, // 可选：生成 sourcemap
     }),
-  ]
+  ],
 };
 
 // 类型声明打包配置
@@ -61,7 +59,7 @@ const dtsConfig = {
   input: 'src/main.tsx',
   output: [{ file: 'dist/types/index.d.ts', format: 'es' }],
   plugins: [dts()],
-   external: [/\.s?css$/], 
+  external: [/\.s?css$/],
 };
 
 export default [config, dtsConfig];
