@@ -1,32 +1,76 @@
-import js from '@eslint/js'; // 配置 eslint 插件
-import globals from 'globals'; // 配置 eslint 插件
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
+import prettierConfig from 'eslint-config-prettier';
 
 export default tseslint.config(
-  { ignores: ['dist', 'storybook-static'] },
+  // 1. 全局忽略
+  { ignores: ['dist', 'storybook-static', 'node_modules'] },
+
+  // 2. 基础 JS 和 TS 推荐规则 (使用更严格的类型检查)
+  js.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+
+  // 3. React 核心规则
   {
-    //继承预设的规则集
-    extends: [js.configs.recommended, ...tseslint.configs.recommended], //扩展 设置 对于js。、ts的推荐校验规则
-    files: ['**/*.{ts,tsx}'], //检查文件范围
-    languageOptions: {
-      ecmaVersion: 2020, //js语法版本
-      globals: globals.browser, // 声明 window 等浏览器环境中所有内置全局变量
+    files: ['**/*.{ts,tsx}'],
+    ...reactRecommended,
+    settings: {
+      react: {
+        version: 'detect', // 自动检测 React 版本
+      },
     },
+  },
+
+  // 4. React Hooks 和 Refresh 插件
+  {
+    files: ['**/*.{ts,tsx}'],
     plugins: {
-      'react-hooks': reactHooks, // 对于 react hooks 的校验
-      'react-refresh': reactRefresh, // 对于 react 热更新的校验 --强制每个文件只能导出 React 组件
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
-    // 对于 extends 相比 优先级较高
     rules: {
-      // 规则设置
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      '@typescript-eslint/no-explicit-any': 'off', // 允许any显示设置
     },
-  }
+  },
+
+  // 5. 可访问性 (a11y) 插件 - 对UI库至关重要
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: { 'jsx-a11y': jsxA11y },
+    rules: jsxA11y.configs.recommended.rules,
+  },
+
+  // 6. 全局语言选项和自定义规则
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+      parserOptions: {
+        project: true, // 启用类型检查规则
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      // 将 'off' 改为 'warn'，提醒开发者修复 any 类型
+      '@typescript-eslint/no-explicit-any': 'warn',
+      // 对未使用的变量进行更精细的控制
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+    },
+  },
+
+  // 7. Prettier 集成，必须放在最后，以覆盖其他格式规则
+  prettierConfig
 );
