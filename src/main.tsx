@@ -7,6 +7,7 @@ export { default as Icon } from './components/Icon';
 export { default as Progress } from './components/Progress';
 export { default as Upload } from './components/Upload';
 export { default as Menu } from './components/Menu/index';
+export { default as Card } from './components/Card';
 // 聚合导出 -- 实际是 import Button xx + export { Button }
 
 import { StrictMode } from 'react';

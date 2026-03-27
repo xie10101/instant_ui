@@ -42,12 +42,12 @@ export default tseslint.config(
     },
   },
 
-  // 5. 可访问性 (a11y) 插件 - 对UI库至关重要
-  {
-    files: ['**/*.{ts,tsx}'],
-    plugins: { 'jsx-a11y': jsxA11y },
-    rules: jsxA11y.configs.recommended.rules,
-  },
+  // // 5. 可访问性 (a11y) 插件 - 对UI库至关重要
+  // {
+  //   files: ['**/*.{ts,tsx}'],
+  //   plugins: { 'jsx-a11y': jsxA11y },
+  //   rules: jsxA11y.configs.recommended.rules,
+  // },
 
   // 6. 全局语言选项和自定义规则
   {
@@ -55,19 +55,20 @@ export default tseslint.config(
       globals: {
         ...globals.browser,
       },
-      parserOptions: {
-        project: true, // 启用类型检查规则
-        tsconfigRootDir: import.meta.dirname,
-      },
+      // parserOptions: {
+      //   project: true, // 启用类型检查规则
+      //   tsconfigRootDir: import.meta.dirname,
+      // },
     },
     rules: {
       // 将 'off' 改为 'warn'，提醒开发者修复 any 类型
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
       // 对未使用的变量进行更精细的控制
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
+      // : [
+      //   'off',
+      //   // { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      // ],
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
 

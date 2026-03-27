@@ -26,10 +26,9 @@ interface ButtonProps {
 // 获取原生 button 的 props 类型
 type NativeBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps; // 交叉类型
 
-/** 存在哪些原生类型 
+/** 存在哪些原生类型
  *  id ， onclick ， onFocus (type 类型将被重新设置 ？ )
  */
-
 
 // 获取原生 a 标签的 props 类型
 type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
@@ -38,7 +37,7 @@ type NativeAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonProps;
 //  ----此处的NativeAnchorProps 没有实际作用 ？
 // function isAnchorProps(props: ButtonPropsPro): props is NativeAnchorProps {
 //   return ;
-// } // 确定 button类型 ? 
+// } // 确定 button类型 ?
 // 联合类型 可以是 a标签原生或者是 button 原生 props
 type ButtonPropsPro = Partial<NativeBtnProps | NativeAnchorProps>;
 
