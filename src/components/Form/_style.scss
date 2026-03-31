@@ -1,0 +1,272 @@
+@use '../../styles/variables.scss' as var;
+
+// Form 组件样式
+// 参考 antd Form 设计规范
+
+.instant-form {
+  margin-bottom: var.$form-margin-bottom;
+  width: 40rem;
+  // ========== Form Item ==========
+  .instant-form-item {
+    margin-bottom: var.$form-item-margin-bottom;
+    display: flex;
+    align-items: center;
+    // 最后一项默认无下边距
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // 紧凑模式
+    &.form-item-compact {
+      margin-bottom: var.$form-compact-item-margin-bottom;
+    }
+
+    // 无外边距模式
+    &.form-item-no-margin {
+      margin-bottom: 0;
+    }
+  }
+
+  // ========== Form Label ==========
+  .instant-form-item-label {
+    width: 4rem;
+    text-align: center;
+    display: inline-block;
+    font-size: var.$form-label-font-size;
+    color: var.$form-label-color;
+    font-weight: var.$form-label-font-weight;
+    line-height: var.$form-label-line-height;
+    margin-bottom: var.$form-label-margin-bottom;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    // 必填标记
+    &.form-label-required::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: var.$form-label-required-color;
+      font-size: var.$form-label-font-size;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+      content: '*';
+    }
+
+    // 可选标记
+    .form-label-optional {
+      margin-left: 4px;
+      color: var.$form-label-optional-color;
+      font-size: var.$form-help-font-size;
+    }
+
+    // 冒号后缀
+    &.form-label-colon::after {
+      content: ':';
+      position: relative;
+      top: -0.5px;
+      margin: 0 8px 0 2px;
+    }
+  }
+
+  // ========== Form Control ==========
+  .instant-form-item-control {
+    width: 80%;
+    position: relative;
+    line-height: var.$line-height-base;
+
+    // 输入框内容
+    .form-item-control-input-content {
+      flex: 1;
+      max-width: var.$input-max-width;
+    }
+  }
+
+  // ========== 帮助文本 ==========
+  .form-item-help {
+    margin-top: var.$form-help-margin-top;
+    font-size: var.$form-help-font-size;
+    color: var.$form-help-color;
+    line-height: var.$line-height-base;
+    clear: both;
+    transition: color 0.3s var.$input-transition;
+  }
+
+  // ========== 额外信息 ==========
+  .form-item-extra {
+    margin-top: var.$form-extra-margin-top;
+    font-size: var.$form-extra-font-size;
+    color: var.$form-extra-color;
+    line-height: var.$line-height-base;
+    clear: both;
+  }
+
+  // ========== 验证反馈信息 ==========
+  .form-item-feedback {
+    margin-top: var.$form-feedback-margin-top;
+    font-size: var.$form-feedback-font-size;
+    line-height: var.$line-height-base;
+    display: flex;
+    align-items: center;
+
+    .form-feedback-icon {
+      font-size: var.$form-feedback-icon-size;
+      margin-right: var.$form-feedback-icon-margin-right;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  // ========== 验证状态 ==========
+
+  // 验证成功
+  .form-item-success {
+    .instant-form-item-label {
+      color: var.$form-feedback-valid-color;
+    }
+
+    .form-item-feedback {
+      color: var.$form-feedback-valid-color;
+    }
+
+    input,
+    textarea,
+    select {
+      border-color: var.$form-input-valid-border-color;
+
+      &:focus {
+        border-color: var.$form-input-valid-border-color;
+        box-shadow: var.$form-input-valid-box-shadow;
+      }
+    }
+  }
+
+  // 验证失败
+  .form-item-error {
+    .instant-form-item-label {
+      color: var.$form-feedback-invalid-color;
+    }
+
+    .form-item-feedback {
+      color: var.$form-feedback-invalid-color;
+    }
+
+    input,
+    textarea,
+    select {
+      border-color: var.$form-input-invalid-border-color;
+
+      &:focus {
+        border-color: var.$form-input-invalid-border-color;
+        box-shadow: var.$form-input-invalid-box-shadow;
+      }
+    }
+  }
+
+  // 警告状态
+  .form-item-warning {
+    .instant-form-item-label {
+      color: var.$form-feedback-warning-color;
+    }
+
+    .form-item-feedback {
+      color: var.$form-feedback-warning-color;
+    }
+
+    input,
+    textarea,
+    select {
+      border-color: var.$form-input-warning-border-color;
+
+      &:focus {
+        border-color: var.$form-input-warning-border-color;
+        box-shadow: var.$form-input-warning-box-shadow;
+      }
+    }
+  }
+
+  // 验证中状态
+  .form-item-validating {
+    .instant-form-item-label {
+      color: var.$form-feedback-validating-color;
+    }
+
+    .form-item-feedback {
+      color: var.$form-feedback-validating-color;
+    }
+  }
+
+  // ========== 布局模式 ==========
+
+  // 水平布局
+  &.form-horizontal {
+    .instant-form-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      .instant-form-item-label {
+        flex: 0 0 var.$form-horizontal-label-width;
+        max-width: var.$form-horizontal-label-width;
+        text-align: var.$form-horizontal-label-text-align;
+        margin-bottom: 0;
+        padding-top: calc(var.$input-padding-y + var.$input-border-width);
+        padding-bottom: calc(var.$input-padding-y + var.$input-border-width);
+      }
+
+      .instant-form-item-control {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+    }
+
+    // 行内布局
+    &.form-inline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      .instant-form-item {
+        display: inline-flex;
+        margin-right: var.$form-inline-margin-right;
+        margin-bottom: var.$form-item-margin-bottom;
+        align-items: center;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .instant-form-item-label {
+          margin-bottom: 0;
+          margin-right: var.$form-inline-label-margin-right;
+          flex-shrink: 0;
+        }
+
+        .instant-form-item-control {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .form-item-help,
+        .form-item-extra,
+        .form-item-feedback {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    // 垂直布局（默认）
+    &.form-vertical {
+      .instant-form-item-label {
+        margin-bottom: var.$form-vertical-label-margin-bottom;
+      }
+    }
+
+    // ========== 禁用状态 ==========
+    &.form-disabled {
+      opacity: var.$form-disabled-opacity;
+    }
+  }
+}

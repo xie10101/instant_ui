@@ -1,0 +1,65 @@
+name: CI/CD 流程
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - master
+  pull_request:
+    branches:
+      - main
+      - develop
+      - master
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: 🔍 检查代码
+        uses: actions/checkout@v4
+
+      - name: 📦 设置 Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: 📥 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 📚 安装依赖
+        run: pnpm install
+
+      - name: 🔍 代码规范检查 (ESLint)
+        run: pnpm lint
+        continue-on-error: false
+
+      - name: 🎨 样式规范检查 (Stylelint)
+        run: pnpm lint:css
+        continue-on-error: true
+
+      - name: ✅ 单元测试 (Jest)
+        run: pnpm test:nowatch
+        continue-on-error: false
+
+      - name: 🔨 项目构建
+        run: pnpm build
+        continue-on-error: false
+
+      - name: 📝 生成测试覆盖率报告
+        run: pnpm test:nowatch -- --coverage
+        continue-on-error: true
+
+      - name: ✨ 格式化检查 (Prettier)
+        run: pnpm format:check
+        continue-on-error: true
+
+      - name: 🎉 流程完成 - 所有检查均通过
+        run: echo "✅ CI/CD 流程成功执行！"

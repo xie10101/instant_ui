@@ -44,6 +44,9 @@ const AutoComplete = <T = object,>(props: AutoCompleteProps<T>) => {
   useClickOut(contentRef, () => {
     setSuggestions([]); // 点击外部时清空建议列表
   });
+  /**
+   * 监听输入值的变化 - 接受並渲染过滤后的选项
+   */
   useEffect(() => {
     if (debounceData && filterOption && selectedRef.current) {
       const result = filterOption(debounceData); // 异步代码未执行完成时 返回的是一个状态为pending的Promise对象
@@ -72,18 +75,17 @@ const AutoComplete = <T = object,>(props: AutoCompleteProps<T>) => {
     setInputValue(inputValue);
   };
 
-  // 此处使用
   const handleSelect = (item: ItemType<T>) => {
-    selectedRef.current = false; // 选中状态
-    setInputValue(item.value); // 选择时 InputValue 赋值 之后的所有逻辑都被重新执行-
+    setInputValue(item.value); // 选择时 InputValue 赋值 之后的所有逻辑都被重新执行
     setSuggestions([]);
+    selectedRef.current = false; // 选中状态
     // 需要使用时 - 传递 参数 - value
     if (onSelect) {
       onSelect(item);
     }
   };
 
-  const handleKeyChange = (index: number) => {
+   const handleKeyChange = (index: number) => {
     if (index < 0) {
       index = suggestions.length - 1;
     }
@@ -171,3 +173,9 @@ const AutoComplete = <T = object,>(props: AutoCompleteProps<T>) => {
 };
 
 export default AutoComplete;
+
+/***
+ *
+ *  selectedRef 的作用是 维护当前选择框的选中状态 -- 选中时不进行useEffect - 输入逻辑的执行
+ *
+ */
