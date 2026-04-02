@@ -50,16 +50,62 @@
  */
 import classNames from 'classnames';
 import './_style.scss';
+import useStore from './useStore';
+import React from 'react';
+/**
+ * 
+ * (alias) function useStore(): {
+    form: FormState;
+    fields: FieldState;
+    dispatch: React.ActionDispatch<[action: FieldsAction]>;
+    setForm: React.Dispatch<React.SetStateAction<FormState>>;
+}
+ */
 interface FormProps {
   name?: string;
   children?: React.ReactNode;
 }
 
+/**
+ *   Pick <ReturnType<typeof useStore>, 'dispatch'>  // 从 useStore 返回值中提取 dispatch 类型
+ *   与之对应的是 - Omit<> 反向提取 -- 排除指定的类型
+ *   type Pick<T, K extends keyof T> = { [P in K]: T[P] }
+ *   ReturnType<T>：提取函数 T 的返回值类型（内置工具）
+ */
+
+// export type FormContext = {
+//   name: string;
+//   dispatch: React.Dispatch<FieldsAction>
+// };
+//  dispatch: React.ActionDispatch<[action: FieldsAction]>;
+
+export type tFormContext = Pick<ReturnType<typeof useStore>, 'dispatch'>; //正向提取
+export const FormContext = React.createContext<tFormContext>(
+  {} as tFormContext
+); // 创建上下文
 const Form: React.FC<FormProps> = (props) => {
   const { name, children } = props;
-
+  const { form, fields, dispatch } = useStore(); // 使用自定义hook 管理表单状态
   const instantFormClass = classNames('instant-form');
-  return <div className={instantFormClass}>{children}</div>;
+
+  // 新赋值 - context
+  const passedContext: tFormContext = {
+    dispatch,
+
+  };
+
+  return (
+    <>
+      <form className={instantFormClass} name={name}>
+        <FormContext.Provider value={passedContext}>
+          {children}
+        </FormContext.Provider>
+      </form>
+      {/* <div>{form.isValid ? '表单有效' : '表单无效'}</div> */}
+      <div>{JSON.stringify(form)}</div>
+      <div>{JSON.stringify(fields)}</div>
+    </>
+  );
 };
 
 export default Form;

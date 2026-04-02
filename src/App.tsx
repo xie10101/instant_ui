@@ -24,21 +24,21 @@ export default function App() {
         </Card.Footer>
       </Card> */}
 
-      <Form>
-        <FormItem label="用户名">
+      <Form name="asa">
+        <FormItem name="username" label="用户名">
           <Input placeholder="请输入用户名" />
         </FormItem>
       </Form>
       <Form>
-        <FormItem label="密码">
+        {/* <FormItem name="password" label="密码">
           <Input type="password" placeholder="请输入密码" />
         </FormItem>
-        <FormItem>
+        <FormItem name="checkbox">
           <Input type="checkbox" /> 记住我
         </FormItem>
-        <FormItem>
+        <FormItem name="xx">
           <Button type="primary">登录</Button>
-        </FormItem>
+        </FormItem> */}
       </Form>
     </div>
   );
