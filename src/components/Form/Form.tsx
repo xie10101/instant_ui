@@ -79,7 +79,10 @@ interface FormProps {
 // };
 //  dispatch: React.ActionDispatch<[action: FieldsAction]>;
 
-export type tFormContext = Pick<ReturnType<typeof useStore>, 'dispatch'>; //正向提取
+export type tFormContext = Pick<
+  ReturnType<typeof useStore>,
+  'dispatch' | 'fields' | 'form'
+>; //正向提取
 export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
 ); // 创建上下文
@@ -91,7 +94,8 @@ const Form: React.FC<FormProps> = (props) => {
   // 新赋值 - context
   const passedContext: tFormContext = {
     dispatch,
-
+    fields,
+    form,
   };
 
   return (
@@ -102,7 +106,6 @@ const Form: React.FC<FormProps> = (props) => {
         </FormContext.Provider>
       </form>
       {/* <div>{form.isValid ? '表单有效' : '表单无效'}</div> */}
-      <div>{JSON.stringify(form)}</div>
       <div>{JSON.stringify(fields)}</div>
     </>
   );

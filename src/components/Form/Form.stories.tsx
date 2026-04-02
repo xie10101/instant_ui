@@ -27,15 +27,21 @@ export const Default: Story = {
     children: (
       <>
         <Form>
-          <FormItem label="用户名">
+          <FormItem name="username" label="用户名">
             <Input placeholder="请输入用户名" />
           </FormItem>
         </Form>
         <Form>
-          <FormItem label="密码">
+          <FormItem name="password" label="密码">
             <Input type="password" placeholder="请输入密码" />
           </FormItem>
-          <FormItem>
+          <FormItem
+            name="remember"
+            label="密码"
+          >
+            <Input type="radio"> 记住我</Input>
+          </FormItem>
+          <FormItem name="submit">
             <Button type="primary">登录</Button>
           </FormItem>
         </Form>

@@ -54,9 +54,10 @@ function fieldsReducer(state: FieldState, action: FieldsAction): FieldState {
     case 'addfield':
       return { ...state, [action.name]: { ...action.value } }; // 返回的值会被
     case 'updatefield':
+      console.log(action.name, action.value);
       return {
         ...state,
-        [action.name]: { ...state[action.name], ...action.value },
+        [action.name]: { ...state[action.name], value: action.value },
       };
     default:
       return state;

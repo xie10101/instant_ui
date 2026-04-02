@@ -1,4 +1,3 @@
-import Card from './components/Card';
 
 import Form from './components/Form';
 import Input from './components/Input';
@@ -30,15 +29,15 @@ export default function App() {
         </FormItem>
       </Form>
       <Form>
-        {/* <FormItem name="password" label="密码">
+        <FormItem name="password" label="密码">
           <Input type="password" placeholder="请输入密码" />
         </FormItem>
-        <FormItem name="checkbox">
+        <FormItem name="checkbox" label="记住我">
           <Input type="checkbox" /> 记住我
         </FormItem>
         <FormItem name="xx">
           <Button type="primary">登录</Button>
-        </FormItem> */}
+        </FormItem>
       </Form>
     </div>
   );

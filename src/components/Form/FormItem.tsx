@@ -44,6 +44,7 @@ const FormItem: React.FC<FormItemProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputvalue(e.target.value);
+    console.log(e.target.value);
     dispatch({
       type: 'updatefield',
       name: name,
