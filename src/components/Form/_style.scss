@@ -11,6 +11,8 @@
     margin-bottom: var.$form-item-margin-bottom;
     display: flex;
     align-items: center;
+    height: 3rem;
+    width: 100%;
     // 最后一项默认无下边距
     &:last-child {
       margin-bottom: 0;
@@ -70,14 +72,14 @@
 
   // ========== Form Control ==========
   .instant-form-item-control {
-    width: 100%;
-    height: 100%;
+    width: 80%;
     line-height: var.$line-height-base;
-    box-shadow: 0 1px 0 rgba(148, 9, 9, 0.05);
     border: 1px solid red;
-    border-radius: 4px; /* 统一圆角更美观 */
-    transition: all 0.2s ease-in-out; /* 过渡更顺滑 */
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    // background-color: red;
     &:focus {
+      box-shadow: -1px 1px 3px 3px rgba(238, 18, 18, 0.3);
     }
 
     // 输入框内容
@@ -87,9 +89,9 @@
     }
   }
 
-  //设置报错提示信息
+  //设置报错提示信息  // 样式处理存在问题
   .form-item-validate-feedback {
-    position: absolute;
+    flex: 1;
     font-size: small;
     color: red;
     top: 2.5rem;

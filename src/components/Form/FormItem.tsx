@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import './_style.scss';
 import { memo } from 'react';
 import { FormContext } from './Form';
-import { RuleItem } from 'async-validator';
 import { CSSTransition } from 'react-transition-group';
+import { CoustomRule } from './useStore';
 import {
   cloneElement,
   Children,
@@ -20,7 +20,7 @@ interface FormItemProps {
   valuePropName?: string;
   trigger?: string;
   getValueFormEvent?: (e: any) => any;
-  rules?: RuleItem[];
+  rules?: CoustomRule[];
 }
 const FormItem: React.FC<FormItemProps> = ({
   name,
@@ -41,14 +41,16 @@ const FormItem: React.FC<FormItemProps> = ({
   //样式变量
   const instantFormItemLabelClass = classNames('instant-form-item-label', {
     'form-label-colon': label && !label.endsWith(':') && !label.endsWith('：'),
-    'form-label-required': rules && rules.some((rule) => rule.required),
+    'form-label-required':
+      rules &&
+      rules.some((rule) => typeof rule !== 'function' && rule.required),
   });
 
   const instantFormItemControlClass = classNames({
     'instant-form-item-control': fields[name]?.errors?.length,
   });
 
-  //测试
+  //初始值设置
   useEffect(() => {
     const value = initialValues && initialValues[name]; // 计算键值 -- 提取动态变量的属性
     dispatch({
@@ -62,7 +64,7 @@ const FormItem: React.FC<FormItemProps> = ({
         rules: rules,
       },
     });
-  }, [initialValues]);
+  }, [initialValues, dispatch, name, rules, label]);
 
   // cloneElement(Children.toArray(children)[0] as JSXElementConstructor<any>);
 
@@ -94,6 +96,11 @@ const FormItem: React.FC<FormItemProps> = ({
    */
   const fieldState = fields[name];
   const value = fieldState?.value;
+  // 直接设置classname：
+
+  const classes = classNames({
+    'instant-form-item-control': fields[name]?.errors?.length,
+  });
 
   // 将clone 后的组件的props 进行创建 ：
   //  对象的属性类型签名
@@ -102,6 +109,7 @@ const FormItem: React.FC<FormItemProps> = ({
     [trigger]: handleChange,
     // 添加 -- onBlur校验处理
     onBlur: handleBlur,
+    className: classes,
   };
 
   const handleCreate = () => {
@@ -129,25 +137,27 @@ const FormItem: React.FC<FormItemProps> = ({
           flexDirection: 'column',
           transition: 'all 0.3s',
           position: 'relative',
+          height: '100%',
+          flex: 1,
         }}
       >
-        <div className={instantFormItemControlClass}>{handleCreate()}</div>
+        {handleCreate()}
         {/*  可选 ? 运算符的处理 - 没法排除对未定义的类型判断的原因 ？  */}
-        <CSSTransition
+        {/* <CSSTransition
           nodeRef={ref}
           in={fieldState?.errors && fieldState.errors.length > 0}
           timeout={300}
           classNames="zoom-in-top"
           appear
-        >
-          <>
-            {fieldState?.errors && fieldState.errors.length > 0 && (
-              <p className="form-item-validate-feedback">
-                {fieldState?.isValid ? '' : fieldState?.errors[0].message}
-              </p>
-            )}
-          </>
-        </CSSTransition>
+        > */}
+        <>
+          {fieldState?.errors && fieldState.errors.length > 0 && (
+            <p className="form-item-validate-feedback">
+              {fieldState?.isValid ? '' : fieldState?.errors[0].message}
+            </p>
+          )}
+        </>
+        {/* </CSSTransition> */}
       </div>
     </div>
   );

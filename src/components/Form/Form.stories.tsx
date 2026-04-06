@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Form, FormItem } from './index';
 import Input from '../Input';
 import Button from '../Button';
+import { CoustomRule } from './useStore';
 
 const FormMeta: Meta<typeof Form> = {
   title: 'Instant表单',
@@ -21,6 +22,24 @@ export default FormMeta;
 
 type Story = StoryObj<typeof Form>; // 设置故事类型
 
+const confirmRules: CoustomRule[] = [
+  {
+    type: 'string',
+    required: true,
+    min: 3,
+    max: 10,
+    message: '用户名长度不能小于3且不能大于10',
+  },
+  ({ getFieldValue }) => ({
+    asyncValidator(rule, value, callback, source, options) {
+      if (value !== getFieldValue('password')) {
+        callback('密码不一致');
+      } else {
+        callback();
+      }
+    },
+  }),
+];
 export const Default: Story = {
   args: {},
   render: () => (
@@ -51,6 +70,9 @@ export const Default: Story = {
           getValueFormEvent={(e) => e.target.checked}
         >
           <Input type="checkbox" />
+        </FormItem>
+        <FormItem name="againPassword" label="确认密码" rules={confirmRules}>
+          <Input type="password" placeholder="请再次输入密码" />
         </FormItem>
         <FormItem name="xx">
           <Button type="primary">登录</Button>
