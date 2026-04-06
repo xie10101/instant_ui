@@ -1,12 +1,11 @@
-
-import Form from './components/Form';
+import Card from './components/Card';
+import { Form, FormItem } from './components/Form';
 import Input from './components/Input';
-import Button from './components/Button';
-import { FormItem } from './components/Form/FormItem';
+import Schema from 'async-validator';
 export default function App() {
   return (
     <div>
-      {/* <Card title="My Card">
+      <Card title="My Card">
         <Card.Content>
           <p>
             This is the content of the card.
@@ -21,22 +20,52 @@ export default function App() {
           <a href="#">Link 1</a>
           <a href="#">Link 2</a>
         </Card.Footer>
-      </Card> */}
+      </Card>
 
-      <Form name="asa">
-        <FormItem name="username" label="用户名">
+      <Form
+        name="asa"
+        initialValues={{
+          username: '123123',
+          password: '123132',
+          checkbox: true,
+        }}
+      >
+        <FormItem
+          name="username"
+          label="用户名"
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名',
+              min: 3,
+              max: 10,
+            },
+          ]}
+        >
           <Input placeholder="请输入用户名" />
         </FormItem>
-      </Form>
-      <Form>
-        <FormItem name="password" label="密码">
+        <FormItem
+          name="password"
+          label="密码"
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名',
+              min: 3,
+              max: 10,
+            },
+          ]}
+        >
           <Input type="password" placeholder="请输入密码" />
         </FormItem>
-        <FormItem name="checkbox" label="记住我">
-          <Input type="checkbox" /> 记住我
-        </FormItem>
-        <FormItem name="xx">
-          <Button type="primary">登录</Button>
+        <FormItem
+          name="checkbox"
+          label="记住我"
+          valuePropName="checked"
+          trigger="onChange"
+          getValueFormEvent={(e) => e.target.checked}
+        >
+          <Input type="checkbox" />
         </FormItem>
       </Form>
     </div>
