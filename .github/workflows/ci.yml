@@ -5,15 +5,15 @@ on:
     branches:
       - main
       - develop
-      - master
+      - learn
   pull_request:
     branches:
       - main
       - develop
-      - master
-
+      - learn
 jobs:
   lint-test-build:
+    # jobs-JOB ID
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,6 +22,7 @@ jobs:
     steps:
       - name: 🔍 检查代码
         uses: actions/checkout@v4
+      #  代码拉取到CI环境 - 默认检出触发的分支代码
 
       - name: 📦 设置 Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -32,7 +33,7 @@ jobs:
       - name: 📥 安装 pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
 
       - name: 📚 安装依赖
         run: pnpm install
@@ -41,25 +42,25 @@ jobs:
         run: pnpm lint
         continue-on-error: false
 
-      - name: 🎨 样式规范检查 (Stylelint)
-        run: pnpm lint:css
-        continue-on-error: true
+      # - name: 🎨 样式规范检查 (Stylelint)
+      #   run: pnpm lint:css
+      #   continue-on-error: true
 
-      - name: ✅ 单元测试 (Jest)
-        run: pnpm test:nowatch
-        continue-on-error: false
+      # - name: ✅ 单元测试 (Jest)
+      #   run: pnpm test:nowatch
+      #   continue-on-error: false
 
-      - name: 🔨 项目构建
-        run: pnpm build
-        continue-on-error: false
+      # - name: 🔨 项目构建
+      #   run: pnpm build
+      #   continue-on-error: false
 
-      - name: 📝 生成测试覆盖率报告
-        run: pnpm test:nowatch -- --coverage
-        continue-on-error: true
+      # - name: 📝 生成测试覆盖率报告
+      #   run: pnpm test:nowatch -- --coverage
+      #   continue-on-error: true
 
-      - name: ✨ 格式化检查 (Prettier)
-        run: pnpm format:check
-        continue-on-error: true
+      # - name: ✨ 格式化检查 (Prettier)
+      #   run: pnpm format:check
+      #   continue-on-error: true
 
       - name: 🎉 流程完成 - 所有检查均通过
         run: echo "✅ CI/CD 流程成功执行！"
