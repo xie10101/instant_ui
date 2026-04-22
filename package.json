@@ -2,9 +2,9 @@
   "name": "@xiex11/instant-ui",
   "version": "1.2.0",
   "type": "module",
-  "main": "dist/instant-ui.js",
-  "module": "dist/instant-ui.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],

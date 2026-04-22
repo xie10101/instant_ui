@@ -1,8 +1,29 @@
 import Card from './components/Card';
 import { Form, FormItem } from './components/Form';
 import Input from './components/Input';
-import Schema from 'async-validator';
+import { CoustomRule } from './components/Form/useStore';
 export default function App() {
+  const confirmRules: CoustomRule[] = [
+    {
+      type: 'string',
+      required: true,
+      min: 3,
+      max: 10,
+      message: '密码长度不能小于3且不能大于10',
+    },
+    // 关键自定义验证规则的设置 -- validator会交给自定义方法自己执行
+    ({ getFieldValue }) => ({
+      // asyncValidator 参数的含义是固定的
+      asyncValidator(rule, value, callback, source, options) {
+        console.log(value);
+        if (value !== getFieldValue('password')) {
+          callback('密码不一致');
+        } else {
+          callback();
+        }
+      },
+    }),
+  ];
   return (
     <div>
       <Card title="My Card">
@@ -50,7 +71,7 @@ export default function App() {
           rules={[
             {
               required: true,
-              message: '请输入用户名',
+              message: '密码长度不能小于3且不能大于10',
               min: 3,
               max: 10,
             },
@@ -66,6 +87,10 @@ export default function App() {
           getValueFormEvent={(e) => e.target.checked}
         >
           <Input type="checkbox" />
+        </FormItem>
+        {/*  添加确认密码的操作 */}
+        <FormItem name="confirmPassword" label="确认密码" rules={confirmRules}>
+          <Input type="password" placeholder="请输入确认密码" />
         </FormItem>
       </Form>
     </div>

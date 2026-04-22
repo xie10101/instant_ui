@@ -7,6 +7,7 @@
 ### 🔄 工作流列表
 
 #### 1. **CI/CD 流程** (`ci.yml`)
+
 - **触发条件**: Push 到 main/develop/master 分支，或提交 PR
 - **执行步骤**:
   - ✅ Node.js 环境设置（18.x 和 20.x 版本）
@@ -23,7 +24,8 @@
 ---
 
 #### 2. **发布到 NPM** (`publish.yml`)
-- **触发条件**: 
+
+- **触发条件**:
   - 创建/发布 Release 标签
   - 手动触发（在 Actions 选项卡中）
 - **执行步骤**:
@@ -33,7 +35,8 @@
   - 📤 **发布到 NPM** 公开包
   - 🎉 发布完成
 
-**前置条件**: 
+**前置条件**:
+
 - 需要配置 `NPM_TOKEN` Secret（必需）
 - 需要在 package.json 中更新版本号
 - 所有 CI/CD 检查必须通过
@@ -41,6 +44,7 @@
 ---
 
 #### 3. **TypeScript 类型检查** (`typescript-check.yml`)
+
 - **触发条件**: Push 到 main/develop/master 分支，或提交 PR
 - **执行步骤**:
   - 📥 安装依赖
@@ -69,6 +73,7 @@
 ### 自动触发工作流
 
 1. **代码规范检查和测试**
+
    ```bash
    git push origin main
    # 自动触发 CI/CD 和 TypeScript 检查
@@ -81,7 +86,6 @@
      git push origin v1.2.1
      # GitHub 会自动创建 Release 并触发发布
      ```
-   
    - 方式 2: 手动触发
      1. 在 GitHub 仓库中点击 Actions 选项卡
      2. 选择 "📦 发布到 NPM" 工作流
@@ -123,13 +127,13 @@ pnpm prepublish
 
 ## 🐛 故障排查
 
-| 问题 | 解决方案 |
-|------|--------|
-| ESLint 失败 | 运行 `pnpm lint:fix` 修复问题 |
-| 测试失败 | 运行 `pnpm test` 查看失败详情 |
-| 类型错误 | 检查 TypeScript 类型定义，运行 `pnpm build-ts` |
-| NPM 发布失败 | 确保 NPM_TOKEN 已正确配置，检查包名和版本 |
-| 依赖安装失败 | 清除缓存后重试，或手动检查 pnpm-lock.yaml |
+| 问题         | 解决方案                                       |
+| ------------ | ---------------------------------------------- |
+| ESLint 失败  | 运行 `pnpm lint:fix` 修复问题                  |
+| 测试失败     | 运行 `pnpm test` 查看失败详情                  |
+| 类型错误     | 检查 TypeScript 类型定义，运行 `pnpm build-ts` |
+| NPM 发布失败 | 确保 NPM_TOKEN 已正确配置，检查包名和版本      |
+| 依赖安装失败 | 清除缓存后重试，或手动检查 pnpm-lock.yaml      |
 
 ---
 

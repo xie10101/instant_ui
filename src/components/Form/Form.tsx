@@ -12,12 +12,6 @@ import Card from '../Card';
     setForm: React.Dispatch<React.SetStateAction<FormState>>;
 }
  */
-interface FormProps {
-  name?: string;
-  children?: React.ReactNode;
-  initialValues?: Record<string, any>;
-}
-
 /**
  *   Pick <ReturnType<typeof useStore>, 'dispatch'>  // 从 useStore 返回值中提取 dispatch 类型
  *   与之对应的是 - Omit<> 反向提取 -- 排除指定的类型
@@ -29,19 +23,28 @@ interface FormProps {
 //   dispatch: React.Dispatch<FieldsAction>
 //  dispatch: React.ActionDispatch<[action: FieldsAction]>;
 
+interface FormProps {
+  name?: string;
+  children?: React.ReactNode;
+  initialValues?: Record<string, any>;
+}
+
+// 交叉和联合类型应该从对象类型和基本类型不同角度看
 export type tFormContext = Pick<
   ReturnType<typeof useStore>,
   'dispatch' | 'fields' | 'form' | 'validateForm'
 > &
   Pick<FormProps, 'initialValues'>;
 
+//从顶层Form组件向下传递内容
 export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
-  // undefined
-); // 创建上下文
+);
 const Form: React.FC<FormProps> = (props) => {
-  const { form, fields, dispatch, validateForm } = useStore(); // 使用自定义hook 管理表单状态
+  const { form, fields, dispatch, validateForm } = useStore();
   const instantFormClass = classNames('instant-form');
+
+  //从顶层Form组件向下传递内容--新Context
   const passedContext: tFormContext = useMemo(
     () => ({
       dispatch,
@@ -56,17 +59,14 @@ const Form: React.FC<FormProps> = (props) => {
   return (
     <>
       <form className={instantFormClass} name={props.name}>
-        <FormContext.Provider value={passedContext}>
+        <FormContext.Provider value={{ ...passedContext }}>
           {props.children}
         </FormContext.Provider>
       </form>
 
+      {/* 用于展示 form - fields 数据内容 */}
       <Card className="" title="表单数据">
-        {JSON.stringify(
-          Array.from(Object.values(fields)).map((item) => {
-            return item;
-          })
-        )}
+        <pre>{JSON.stringify({ form, fields }, null, 2)}</pre>
       </Card>
     </>
   );

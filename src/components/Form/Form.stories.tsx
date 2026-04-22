@@ -30,8 +30,11 @@ const confirmRules: CoustomRule[] = [
     max: 10,
     message: '用户名长度不能小于3且不能大于10',
   },
+  // 关键自定义验证规则的设置 -- validator会交给自定义方法自己执行
   ({ getFieldValue }) => ({
+    // asyncValidator 参数的含义是固定的
     asyncValidator(rule, value, callback, source, options) {
+      console.log(value);
       if (value !== getFieldValue('password')) {
         callback('密码不一致');
       } else {
@@ -45,12 +48,32 @@ export const Default: Story = {
   render: () => (
     <>
       <Form name="asa">
-        <FormItem name="username" label="用户名">
+        <FormItem
+          name="username"
+          label="用户名"
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名',
+              min: 3,
+              max: 10,
+            },
+          ]}
+        >
           <Input placeholder="请输入用户名" />
         </FormItem>
-      </Form>
-      <Form>
-        <FormItem name="password" label="密码">
+        <FormItem
+          name="password"
+          label="密码"
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名',
+              min: 3,
+              max: 10,
+            },
+          ]}
+        >
           <Input type="password" placeholder="请输入密码" />
         </FormItem>
         <FormItem

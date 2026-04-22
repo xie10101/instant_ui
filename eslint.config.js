@@ -53,9 +53,9 @@ export default tseslint.config([
         { allowConstantExport: true },
       ],
       'react/react-in-jsx-scope': 'off', // 关闭 React 17+ 不再需要的规则
-      'react/jsx-uses-react': 'off',    // 关闭 React 17+ 不再需要的规则
-      'react/prop-types': 'off',      // 关闭 TypeScript 项目中冗余的 prop-types 检查
-      'react/display-name': 'off',    // 关闭 display-name 检查
+      'react/jsx-uses-react': 'off', // 关闭 React 17+ 不再需要的规则
+      'react/prop-types': 'off', // 关闭 TypeScript 项目中冗余的 prop-types 检查
+      'react/display-name': 'off', // 关闭 display-name 检查
     },
   },
 
@@ -73,8 +73,7 @@ export default tseslint.config([
       globals: {
         ...globals.browser,
       },
-      parserOptions: {
-      },
+      parserOptions: {},
     },
     rules: {
       // 将 'off' 改为 'warn'，提醒开发者修复 any 类型

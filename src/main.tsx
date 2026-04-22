@@ -14,6 +14,4 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 
 //  ---React处理基础 --根容器 -- 根容器渲染 - 虚拟DOM 设置
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <App />
-);
+createRoot(document.getElementById('root') as HTMLElement).render(<App />);

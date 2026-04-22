@@ -85,7 +85,7 @@ const AutoComplete = <T = object,>(props: AutoCompleteProps<T>) => {
     }
   };
 
-   const handleKeyChange = (index: number) => {
+  const handleKeyChange = (index: number) => {
     if (index < 0) {
       index = suggestions.length - 1;
     }

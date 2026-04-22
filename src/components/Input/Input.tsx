@@ -26,7 +26,6 @@ export interface InputProps extends Omit<
   placeholder?: string;
 }
 
-
 /**
  * Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
  *
@@ -97,8 +96,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 export default Input;
 
-
-//  可补充 
+//  可补充
 {
   /* input 属于表单组件 一部分： 常常用于表单提交的快捷方式 ：
             name 表单项字段名 
