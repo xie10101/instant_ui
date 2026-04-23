@@ -48,16 +48,16 @@ import { useReducer, useState } from 'react';
 import Schema from 'async-validator';
 //  针对 规则和错误结构应该获取特定 ：
 import { RuleItem, ValidateError } from 'async-validator';
-import lodash from 'lodash';
+import lodash, { each } from 'lodash';
 
 /**
  * @returns 表单数据维护和校验逻辑处理的useHook
  */
-function useStore() {
+function useStore(initialValues?: Record<string, any>) {
   const [form, setForm] = useState<FormState>({
     isValid: true,
-    isSumbitting: false,
     errors: {},
+    isSumbitting: false,
   });
   const [fields, dispatch] = useReducer(fieldsReducer, {}); // 设置初识状态
 
@@ -189,6 +189,49 @@ function useStore() {
       values: validateItems,
     };
   };
+
+  // 向外暴露多种操作方法 ：
+  const getFieldsValue = () => {
+    return lodash.mapValues(fields, (field) => {
+      return field.value;
+    });
+  };
+
+  const setFieldsValue = (newFields: Record<string, any>) => {
+    /**
+     * 更新表单字段值
+     * @param value - 字段的新值
+     * @param name - 字段名称
+     */
+    lodash.each(newFields, (value, name) => {
+      if (!fields[name]) return;
+      dispatch({
+        type: 'updatefield',
+        name,
+        actionValue: {
+          name,
+          value,
+        },
+      });
+    });
+  };
+
+  const resetFields = () => {
+    if (initialValues) {
+      lodash.each(initialValues, (value, name) => {
+        if (fields[name]) {
+          dispatch({
+            type: 'updatefield',
+            name,
+            actionValue: {
+              name,
+              value,
+            },
+          });
+        }
+      });
+    }
+  };
   return {
     form,
     fields,
@@ -196,6 +239,9 @@ function useStore() {
     setForm,
     validateForm,
     validateAllFields,
+    getFieldsValue,
+    setFieldsValue,
+    resetFields,
   };
 }
 

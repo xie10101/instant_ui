@@ -29,8 +29,9 @@ export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
 );
 const Form: React.FC<FormProps> = (props) => {
-  const { form, fields, dispatch, validateForm, validateAllFields } =
-    useStore();
+  const { form, fields, dispatch, validateForm, validateAllFields } = useStore(
+    props.initialValues
+  );
   const instantFormClass = classNames('instant-form');
 
   //从顶层Form组件向下传递内容--新Context
