@@ -4,6 +4,7 @@ import Input from '../Input';
 import Button from '../Button';
 import { CoustomRule } from './useStore';
 import { set } from 'lodash';
+import { useRef } from 'react';
 
 const FormMeta: Meta<typeof Form> = {
   title: 'Instant表单',
@@ -55,79 +56,81 @@ export const Default: Story = {
     name: 'asa',
     onFinish: handleSubmit,
   },
-  render: (args) => (
-    <>
-      <Form {...args}>
-        {(form) => {
-          return (
-            <>
-              <FormItem
-                name="username"
-                label="用户名"
-                rules={[
-                  {
-                    required: true,
-                    message: '用户名长度不能小于3且不能大于10',
-                    min: 3,
-                    max: 10,
-                  },
-                ]}
-              >
-                <Input placeholder="请输入用户名" />
-              </FormItem>
-              <FormItem
-                name="password"
-                label="密码"
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入密码',
-                    min: 3,
-                    max: 10,
-                  },
-                ]}
-              >
-                <Input type="password" placeholder="请输入密码" />
-              </FormItem>
-              <FormItem
-                name="radio"
-                label="记住我"
-                valuePropName="value"
-                trigger="onChange"
-                getValueFormEvent={(e) => e.target.checked}
-              >
-                <Input type="radio" />
-              </FormItem>
-              <FormItem
-                name="checkbox"
-                label="记住我"
-                valuePropName="checked"
-                trigger="onChange"
-                getValueFormEvent={(e) => e.target.checked}
-                rules={[
-                  {
-                    type: 'enum',
-                    enum: [true],
-                    message: '请同意协议',
-                  },
-                ]}
-              >
-                <Input type="checkbox" />
-              </FormItem>
-              <FormItem
-                name="againPassword"
-                label="确认密码"
-                rules={confirmRules}
-              >
-                <Input type="password" placeholder="请再次输入密码" />
-              </FormItem>
-              <button type="submit" disabled={form.isSumbitting}>
-                {form.isSumbitting ? '登录中' : '登录'}
-              </button>
-            </>
-          );
-        }}
-      </Form>
-    </>
-  ),
+  render: (args) => {
+    return (
+      <>
+        <Form {...args}>
+          {(form) => {
+            return (
+              <>
+                <FormItem
+                  name="username"
+                  label="用户名"
+                  rules={[
+                    {
+                      required: true,
+                      message: '用户名长度不能小于3且不能大于10',
+                      min: 3,
+                      max: 10,
+                    },
+                  ]}
+                >
+                  <Input placeholder="请输入用户名" />
+                </FormItem>
+                <FormItem
+                  name="password"
+                  label="密码"
+                  rules={[
+                    {
+                      required: true,
+                      message: '请输入密码',
+                      min: 3,
+                      max: 10,
+                    },
+                  ]}
+                >
+                  <Input type="password" placeholder="请输入密码" />
+                </FormItem>
+                <FormItem
+                  name="radio"
+                  label="记住我"
+                  valuePropName="value"
+                  trigger="onChange"
+                  getValueFormEvent={(e) => e.target.checked}
+                >
+                  <Input type="radio" />
+                </FormItem>
+                <FormItem
+                  name="checkbox"
+                  label="记住我"
+                  valuePropName="checked"
+                  trigger="onChange"
+                  getValueFormEvent={(e) => e.target.checked}
+                  rules={[
+                    {
+                      type: 'enum',
+                      enum: [true],
+                      message: '请同意协议',
+                    },
+                  ]}
+                >
+                  <Input type="checkbox" />
+                </FormItem>
+                <FormItem
+                  name="againPassword"
+                  label="确认密码"
+                  rules={confirmRules}
+                >
+                  <Input type="password" placeholder="请再次输入密码" />
+                </FormItem>
+                <button type="submit" disabled={form.isSumbitting}>
+                  {form.isSumbitting ? '登录中' : '登录'}
+                </button>
+              </>
+            );
+          }}
+        </Form>
+      </>
+    );
+  },
 };

@@ -2,6 +2,8 @@ import Card from './components/Card';
 import { Form, FormItem } from './components/Form';
 import Input from './components/Input';
 import { CoustomRule } from './components/Form/useStore';
+import { useRef } from 'react';
+import { IFormRef } from './components/Form/Form';
 export default function App() {
   const confirmRules: CoustomRule[] = [
     {
@@ -27,6 +29,13 @@ export default function App() {
   const handleFinish = (values) => {
     console.log('handleFinish');
   };
+
+  //  补充 对 reset/set/get 方法使用的回调
+  const ref = useRef<IFormRef>(null);
+  const resetAll = () => {
+    console.log(ref.current && ref.current.resetFields());
+  };
+
   return (
     <div>
       <Card title="My Card">
@@ -54,6 +63,7 @@ export default function App() {
           checkbox: true,
         }}
         onFinish={handleFinish}
+        ref={ref}
       >
         <FormItem
           name="username"
@@ -98,6 +108,11 @@ export default function App() {
         </FormItem>
         <FormItem name="submit">
           <button type="submit">登录</button>
+        </FormItem>
+        <FormItem name="reset">
+          <button type="button" onClick={resetAll}>
+            重置
+          </button>
         </FormItem>
       </Form>
     </div>

@@ -4,6 +4,7 @@ import useStore, { FormState } from './useStore';
 import React, { useMemo } from 'react';
 import Card from '../Card';
 import { ValidateError } from 'async-validator';
+import { useImperativeHandle } from 'react';
 export type RenderProps = (form: FormState) => React.ReactNode;
 
 interface FormProps {
@@ -28,10 +29,22 @@ export type tFormContext = Pick<
 export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
 );
-const Form: React.FC<FormProps> = (props) => {
-  const { form, fields, dispatch, validateForm, validateAllFields } = useStore(
-    props.initialValues
-  );
+
+export type IFormRef = Omit<
+  ReturnType<typeof useStore>,
+  'fields' | 'dispatch' | 'form'
+>;
+const Form = React.forwardRef<IFormRef, FormProps>((props, ref) => {
+  const { form, fields, dispatch, ...restFun } = useStore(props.initialValues);
+
+  const { validateForm, validateAllFields } = restFun;
+
+  useImperativeHandle(ref, () => {
+    return {
+      ...restFun,
+    };
+  });
+
   const instantFormClass = classNames('instant-form');
 
   //从顶层Form组件向下传递内容--新Context
@@ -77,6 +90,7 @@ const Form: React.FC<FormProps> = (props) => {
         className={instantFormClass}
         name={props.name}
         onSubmit={handleSumbit}
+        ref={ref}
       >
         <FormContext.Provider value={{ ...passedContext }}>
           {childrenNode}
@@ -89,6 +103,6 @@ const Form: React.FC<FormProps> = (props) => {
       </Card>
     </>
   );
-};
+});
 
 export default Form;
