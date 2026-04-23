@@ -108,7 +108,6 @@ function useStore() {
       })
       .catch(({ errors }) => {
         const isValid = false;
-        console.log(errors);
         dispatch({
           type: 'validated',
           name,
@@ -119,9 +118,7 @@ function useStore() {
           },
         });
       })
-      .finally(() => {
-        console.log('校验结束');
-      });
+      .finally(() => {});
   };
 
   const validateAllFields = async () => {
@@ -140,18 +137,20 @@ function useStore() {
     const validateItems = lodash.mapValues(fields, (field) => {
       return field.value;
     });
+    console.log(validateItems, descriptors);
     const validator = new Schema(descriptors);
-    // setForm((pre) => {
-    //   return { ...pre, isSumbitting: true };
-    // });
+    setForm((pre) => {
+      return { ...pre, isSumbitting: true };
+    });
     try {
-      await validator.validate(descriptors);
+      await validator.validate(validateItems);
     } catch (e) {
+      console.log(e);
       isValid = false;
       const err = e as ValidateErrorType; // 设置该类型会帮助之后的参数选择/配合TS提示
       errors = err.fields;
       lodash.each(fields, (value, name) => {
-        // 需要保证 errors-对应表单项错误的存在 --
+        // 这段的逻辑再思考
         const err = errors[name];
         if (err) {
           dispatch({
@@ -159,12 +158,11 @@ function useStore() {
             name,
             actionValue: {
               name,
+              isValid: false,
               errors: err,
             },
           });
-        }
-        // 保证存在rules
-        if (fields[name].rules && fields[name].rules.length > 0 && !err) {
+        } else if (fields[name].rules && fields[name].rules.length > 0) {
           dispatch({
             type: 'validated',
             name,

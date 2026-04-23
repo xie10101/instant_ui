@@ -21,7 +21,7 @@ interface FormItemProps {
   trigger?: string;
   getValueFormEvent?: (e: any) => any;
   rules?: CoustomRule[];
-  errors: ValidateError[];
+  errors?: ValidateError[];
 }
 const FormItem: React.FC<FormItemProps> = ({
   name,

@@ -23,6 +23,10 @@ export default function App() {
     //   },
     // }),
   ];
+
+  const handleFinish = (values) => {
+    console.log('handleFinish');
+  };
   return (
     <div>
       <Card title="My Card">
@@ -49,6 +53,7 @@ export default function App() {
           password: '123132',
           checkbox: true,
         }}
+        onFinish={handleFinish}
       >
         <FormItem
           name="username"
@@ -78,7 +83,7 @@ export default function App() {
         >
           <Input type="password" placeholder="请输入密码" />
         </FormItem>
-        {/* <FormItem
+        <FormItem
           name="checkbox"
           label="记住我"
           valuePropName="checked"
@@ -86,11 +91,14 @@ export default function App() {
           getValueFormEvent={(e) => e.target.checked}
         >
           <Input type="checkbox" />
-        </FormItem> */}
+        </FormItem>
         {/*  添加确认密码的操作 */}
-        {/* <FormItem name="confirmPassword" label="确认密码" rules={confirmRules}>
+        <FormItem name="confirmPassword" label="确认密码" rules={confirmRules}>
           <Input type="password" placeholder="请输入确认密码" />
-        </FormItem> */}
+        </FormItem>
+        <FormItem name="submit">
+          <button type="submit">登录</button>
+        </FormItem>
       </Form>
     </div>
   );

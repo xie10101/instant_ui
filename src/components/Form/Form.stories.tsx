@@ -26,15 +26,11 @@ const confirmRules: CoustomRule[] = [
   {
     type: 'string',
     required: true,
-    min: 3,
-    max: 10,
-    message: '用户名长度不能小于3且不能大于10',
   },
   // 关键自定义验证规则的设置 -- validator会交给自定义方法自己执行
   ({ getFieldValue }) => ({
     // asyncValidator 参数的含义是固定的
     asyncValidator(rule, value, callback, source, options) {
-      console.log(value);
       if (value !== getFieldValue('password')) {
         callback('密码不一致');
       } else {
@@ -43,18 +39,26 @@ const confirmRules: CoustomRule[] = [
     },
   }),
 ];
+
+function handleSubmit(values) {
+  console.log('onFinish触发');
+}
+
 export const Default: Story = {
-  args: {},
-  render: () => (
+  args: {
+    name: 'asa',
+    onFinish: handleSubmit,
+  },
+  render: (args) => (
     <>
-      <Form name="asa">
+      <Form {...args}>
         <FormItem
           name="username"
           label="用户名"
           rules={[
             {
               required: true,
-              message: '请输入用户名',
+              message: '用户名长度不能小于3且不能大于10',
               min: 3,
               max: 10,
             },
@@ -68,7 +72,7 @@ export const Default: Story = {
           rules={[
             {
               required: true,
-              message: '请输入用户名',
+              message: '请输入密码',
               min: 3,
               max: 10,
             },
@@ -91,15 +95,20 @@ export const Default: Story = {
           valuePropName="checked"
           trigger="onChange"
           getValueFormEvent={(e) => e.target.checked}
+          rules={[
+            {
+              type: 'enum',
+              enum: [true],
+              message: '请同意协议',
+            },
+          ]}
         >
           <Input type="checkbox" />
         </FormItem>
         <FormItem name="againPassword" label="确认密码" rules={confirmRules}>
           <Input type="password" placeholder="请再次输入密码" />
         </FormItem>
-        <FormItem name="xx">
-          <Button type="primary">登录</Button>
-        </FormItem>
+        <button type="submit">登录</button>
       </Form>
     </>
   ),

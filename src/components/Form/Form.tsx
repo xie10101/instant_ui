@@ -3,6 +3,7 @@ import './_style.scss';
 import useStore from './useStore';
 import React, { useMemo } from 'react';
 import Card from '../Card';
+import { ValidateError } from 'async-validator';
 
 /**
  *   Pick <ReturnType<typeof useStore>, 'dispatch'>  // 从 useStore 返回值中提取 dispatch 类型
@@ -19,6 +20,11 @@ interface FormProps {
   name?: string;
   children?: React.ReactNode;
   initialValues?: Record<string, any>;
+  onFinish?: (values: Record<string, any>) => void;
+  onFinishFailed?: (
+    values: Record<string, any>,
+    errors: Record<string, ValidateError[]>
+  ) => void;
 }
 
 // 交叉和联合类型应该从对象类型和基本类型不同角度看
@@ -49,9 +55,29 @@ const Form: React.FC<FormProps> = (props) => {
     [dispatch, fields, form, props.initialValues, validateForm]
   );
 
+  /**
+   * 表单提交逻辑
+   */
+
+  const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // 阻止默认事件触发以及阻止冒泡
+    e.preventDefault();
+    e.stopPropagation();
+    const { isValid, errors, values } = await validateAllFields();
+    if (isValid && props.onFinish) {
+      props.onFinish(values);
+    } else if (!isValid && props.onFinishFailed) {
+      props.onFinishFailed(values, errors);
+    }
+  };
+
   return (
     <>
-      <form className={instantFormClass} name={props.name}>
+      <form
+        className={instantFormClass}
+        name={props.name}
+        onSubmit={handleSumbit}
+      >
         <FormContext.Provider value={{ ...passedContext }}>
           {props.children}
         </FormContext.Provider>
