@@ -1,24 +1,14 @@
 import classNames from 'classnames';
 import './_style.scss';
-import useStore from './useStore';
+import useStore, { FormState } from './useStore';
 import React, { useMemo } from 'react';
 import Card from '../Card';
 import { ValidateError } from 'async-validator';
-
-/**
- *   Pick <ReturnType<typeof useStore>, 'dispatch'>  // 从 useStore 返回值中提取 dispatch 类型
- *   与之对应的是 - Omit<> 反向提取 -- 排除指定的类型
- *   type Pick<T, K extends keyof T> = { [P in K]: T[P] }
- *   ReturnType<T>：提取函数 T 的返回值类型（内置工具）
- */
-
-// dispatch type ：
-//   dispatch: React.Dispatch<FieldsAction>
-//  dispatch: React.ActionDispatch<[action: FieldsAction]>;
+export type RenderProps = (form: FormState) => React.ReactNode;
 
 interface FormProps {
   name?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode | RenderProps;
   initialValues?: Record<string, any>;
   onFinish?: (values: Record<string, any>) => void;
   onFinishFailed?: (
@@ -71,6 +61,15 @@ const Form: React.FC<FormProps> = (props) => {
     }
   };
 
+  /**
+   *  判断 children 的类型 判断渲染
+   */
+  let childrenNode: React.ReactNode;
+  if (typeof props.children === 'function') {
+    childrenNode = props.children(form);
+  } else {
+    childrenNode = props.children;
+  }
   return (
     <>
       <form
@@ -79,7 +78,7 @@ const Form: React.FC<FormProps> = (props) => {
         onSubmit={handleSumbit}
       >
         <FormContext.Provider value={{ ...passedContext }}>
-          {props.children}
+          {childrenNode}
         </FormContext.Provider>
       </form>
 
