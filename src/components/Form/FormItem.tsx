@@ -11,6 +11,7 @@ import {
   ReactElement,
   useRef,
 } from 'react';
+import { ValidateError } from 'async-validator';
 
 interface FormItemProps {
   label?: string;
@@ -20,6 +21,7 @@ interface FormItemProps {
   trigger?: string;
   getValueFormEvent?: (e: any) => any;
   rules?: CoustomRule[];
+  errors: ValidateError[];
 }
 const FormItem: React.FC<FormItemProps> = ({
   name,
@@ -27,7 +29,7 @@ const FormItem: React.FC<FormItemProps> = ({
   children,
   valuePropName = 'value',
   trigger = 'onChange',
-  rules,
+  rules = [],
   getValueFormEvent = (e: any) => e.target.value,
 }: FormItemProps) => {
   const { dispatch, fields, initialValues, validateForm } =
@@ -37,7 +39,7 @@ const FormItem: React.FC<FormItemProps> = ({
     'instant-from-item-label': !label,
   });
   const instantFormItemLabelClass = classNames('instant-form-item-label', {
-    'form-label-colon': label && !label.endsWith(':') && !label.endsWith('：'),
+    'form-label-colon': label && !label.endsWith(':') && !label.endsWith(':'),
     'form-label-required':
       rules &&
       rules.some((rule) => typeof rule !== 'function' && rule.required),
@@ -60,10 +62,10 @@ const FormItem: React.FC<FormItemProps> = ({
         label: label as string,
         value: value,
         isValid: true,
-        rules: rules,
+        rules,
       },
     });
-  }, [initialValues, dispatch, name, rules, label]);
+  }, [initialValues, dispatch, name, label]);
 
   /**
    *  动态修改回调
@@ -148,5 +150,3 @@ const FormItem: React.FC<FormItemProps> = ({
 };
 // 缓存该组件
 export default memo(FormItem);
-
-

@@ -1,7 +1,7 @@
 export interface FormState {
   isValid: boolean;
   isSumbitting: boolean;
-  errors: ValidateError[];
+  errors: Record<string, ValidateError[]>;
 }
 
 export interface FieldState {
@@ -29,6 +29,7 @@ export interface FieldsAction {
   };
 }
 
+// 针对自定义规则函数- 回调类型
 export type GetFieldValue = (key: string) => any;
 //返回的RuleItem包含async-validator-异步校验器类型
 export type CustomRuleFunc = (helpers: {
@@ -37,10 +38,17 @@ export type CustomRuleFunc = (helpers: {
 
 export type CoustomRule = RuleItem | CustomRuleFunc;
 
+//  主要认知 -- 为啥该类型继承Error 原始类型
+export interface ValidateErrorType extends Error {
+  fields: Record<string, ValidateError[]>;
+  errors: ValidateError[];
+}
+
 import { useReducer, useState } from 'react';
 import Schema from 'async-validator';
 //  针对 规则和错误结构应该获取特定 ：
 import { RuleItem, ValidateError } from 'async-validator';
+import lodash from 'lodash';
 
 /**
  * @returns 表单数据维护和校验逻辑处理的useHook
@@ -49,26 +57,29 @@ function useStore() {
   const [form, setForm] = useState<FormState>({
     isValid: true,
     isSumbitting: false,
-    errors: [],
+    errors: {},
   });
   const [fields, dispatch] = useReducer(fieldsReducer, {}); // 设置初识状态
 
+  // 自定义rule的回调参数-之后
+  const getFieldValue = (key: string) => {
+    return fields[key] && fields[key].value;
+  };
+  //  转换验证规则
+  const transfromRules = (rules: CoustomRule[]) => {
+    return rules.map((rule) => {
+      if (typeof rule == 'function') {
+        const calledRule = rule({ getFieldValue }); // 使用到了闭包方式在异步校验器中获取到了其他控件的value
+        return calledRule;
+      }
+      return rule;
+    });
+  };
+  /**
+   * 验证表单字段
+   *
+   */
   const validateForm = async (name: string) => {
-    // 自定义rule的回调参数-之后
-    const getFieldValue = (key: string) => {
-      return fields[key] && fields[key].value;
-    };
-
-    //  转换验证规则
-    const transfromRules = (rules: CoustomRule[]) => {
-      return rules.map((rule) => {
-        if (typeof rule == 'function') {
-          const calledRule = rule({ getFieldValue }); // 使用到了闭包方式在异步校验器中获取到了其他控件的value
-          return calledRule;
-        }
-        return rule;
-      });
-    };
     const { value, rules } = fields[name];
     const afterRules = transfromRules(rules!);
     //  校验规则
@@ -97,6 +108,7 @@ function useStore() {
       })
       .catch(({ errors }) => {
         const isValid = false;
+        console.log(errors);
         dispatch({
           type: 'validated',
           name,
@@ -112,33 +124,80 @@ function useStore() {
       });
   };
 
-  //  待完成
-  //表单整体验证逻辑
-  /**
-   *    先获取整体的规则 + values
-   *     设置 validateAllFields 执行 整体验证
-   *
-   *  // 数据结构需要 进行的转变
-   * {
-   *   username : {
-   *   value:"abc" , rules:R[]
-   * }
-   *  {username: value}
-   *  {username : rules[]}
-   * }
-   */
+  const validateAllFields = async () => {
+    let isValid = true;
+    let errors: Record<string, ValidateError[]> = {};
 
-  const validateAllFields = () => {
-    const descriptors = {};
-    const validateItems = {};
+    // 对当前的fields 处理
+    const descriptors = lodash.mapValues(fields, (field) => {
+      if (field.rules) {
+        return transfromRules(field.rules);
+      } else {
+        return {};
+      }
+    });
+
+    const validateItems = lodash.mapValues(fields, (field) => {
+      return field.value;
+    });
+    const validator = new Schema(descriptors);
+    // setForm((pre) => {
+    //   return { ...pre, isSumbitting: true };
+    // });
+    try {
+      await validator.validate(descriptors);
+    } catch (e) {
+      isValid = false;
+      const err = e as ValidateErrorType; // 设置该类型会帮助之后的参数选择/配合TS提示
+      errors = err.fields;
+      lodash.each(fields, (value, name) => {
+        // 需要保证 errors-对应表单项错误的存在 --
+        const err = errors[name];
+        if (err) {
+          dispatch({
+            type: 'validated',
+            name,
+            actionValue: {
+              name,
+              errors: err,
+            },
+          });
+        }
+        // 保证存在rules
+        if (fields[name].rules && fields[name].rules.length > 0 && !err) {
+          dispatch({
+            type: 'validated',
+            name,
+            actionValue: {
+              name,
+              errors: [],
+            },
+          });
+        }
+      });
+    } finally {
+      setForm((pre) => {
+        return {
+          ...pre,
+          isSumbitting: false,
+          isValid,
+        };
+      });
+      // 返回部分信息
+    }
+    return {
+      isValid,
+      errors,
+      values: validateItems,
+    };
   };
-
   return {
     form,
     fields,
     dispatch,
     setForm,
     validateForm,
+    validateAllFields,
   };
 }
 

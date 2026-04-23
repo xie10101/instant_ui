@@ -1,17 +1,9 @@
 import classNames from 'classnames';
 import './_style.scss';
 import useStore from './useStore';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Card from '../Card';
-/**
- * 
- * (alias) function useStore(): {
-    form: FormState;
-    fields: FieldState;
-    dispatch: React.ActionDispatch<[action: FieldsAction]>;
-    setForm: React.Dispatch<React.SetStateAction<FormState>>;
-}
- */
+
 /**
  *   Pick <ReturnType<typeof useStore>, 'dispatch'>  // 从 useStore 返回值中提取 dispatch 类型
  *   与之对应的是 - Omit<> 反向提取 -- 排除指定的类型
@@ -41,7 +33,8 @@ export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
 );
 const Form: React.FC<FormProps> = (props) => {
-  const { form, fields, dispatch, validateForm } = useStore();
+  const { form, fields, dispatch, validateForm, validateAllFields } =
+    useStore();
   const instantFormClass = classNames('instant-form');
 
   //从顶层Form组件向下传递内容--新Context
