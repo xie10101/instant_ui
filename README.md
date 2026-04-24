@@ -28,6 +28,8 @@ yarn add @xiex11/instant-ui
 ### 基础使用
 
 ```tsx
+//样式建议在根组件添加instant-ui样式文件：
+import '@xiex11/instant-ui/dist/styles.css';
 import React from 'react';
 import { Button, Input, Card } from '@xiex11/instant-ui';
 
