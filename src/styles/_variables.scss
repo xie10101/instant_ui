@@ -183,13 +183,87 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
 $box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
 $box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
 $box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
-$border-radius: 0.45rem !default;
-$border-radius-lg: 0.8rem !default;
-$border-radius-sm: 0.3rem !default;
+$border-radius: 0.4rem !default;
+$border-radius-lg: 0.6rem !default;
+$border-radius-sm: 0.2rem !default;
 
 /**
  * 表单
  */
+
+// Form 基础变量
+$form-margin-bottom: 1.5rem !default;
+$form-item-margin-bottom: 1.5rem !default;
+$form-item-trailing-colon: true !default;
+
+// Form 标签 (Label)
+$form-label-font-size: $font-size-base !default;
+$form-label-color: $gray-700 !default;
+$form-label-font-weight: $font-weight-normal !default;
+$form-label-line-height: $line-height-base !default;
+$form-label-margin-bottom: 0.5rem !default;
+$form-label-required-color: $danger !default;
+$form-label-optional-color: $gray-500 !default;
+
+// Form 标签对齐方式
+$form-label-horizontal-margin-right: 1rem !default;
+$form-label-vertical-margin-bottom: 0.5rem !default;
+
+// Form 行内布局
+$form-inline-margin-right: 1rem !default;
+$form-inline-label-margin-right: 0.5rem !default;
+
+// Form 帮助文本
+$form-help-font-size: $font-size-sm !default;
+$form-help-color: $gray-600 !default;
+$form-help-margin-top: 0.25rem !default;
+
+// Form 额外信息
+$form-extra-font-size: $font-size-sm !default;
+$form-extra-color: $gray-600 !default;
+$form-extra-margin-top: 0.25rem !default;
+
+// Form 验证状态
+$form-feedback-font-size: $font-size-sm !default;
+$form-feedback-margin-top: 0.25rem !default;
+$form-feedback-icon-size: $font-size-base !default;
+$form-feedback-icon-margin-right: 0.25rem !default;
+
+// Form 验证状态颜色
+$form-feedback-valid-color: $success !default;
+$form-feedback-invalid-color: $danger !default;
+$form-feedback-warning-color: $warning !default;
+$form-feedback-validating-color: $primary !default;
+
+// Form 输入框验证状态边框
+$form-input-valid-border-color: $success !default;
+$form-input-invalid-border-color: $danger !default;
+$form-input-warning-border-color: $warning !default;
+
+// Form 输入框验证状态背景
+$form-input-valid-bg: null !default;
+$form-input-invalid-bg: null !default;
+$form-input-warning-bg: null !default;
+
+// Form 输入框验证状态阴影
+$form-input-valid-box-shadow: 0 0 0 0.2rem rgba($success, 0.25) !default;
+$form-input-invalid-box-shadow: 0 0 0 0.2rem rgba($danger, 0.25) !default;
+$form-input-warning-box-shadow: 0 0 0 0.2rem rgba($warning, 0.25) !default;
+
+// Form 布局 - 水平
+$form-horizontal-label-width: 8rem !default;
+$form-horizontal-label-text-align: right !default;
+
+// Form 布局 - 垂直
+$form-vertical-label-margin-bottom: 0.5rem !default;
+
+// Form 布局 - 紧凑
+$form-compact-item-margin-bottom: 0.5rem !default;
+
+// Form 禁用状态
+$form-disabled-opacity: 0.65 !default;
+$form-disabled-color: $gray-600 !default;
+$form-disabled-bg: $gray-200 !default;
 
 /**
  * 按钮
@@ -291,7 +365,7 @@ $input-color: $gray-700 !default;
 $input-border-color: $gray-400 !default;
 $input-border-width: $border-width !default;
 $input-box-shadow: $box-shadow-inset !default;
-$input-border-radius: $border-radius !default;
+$input-border-radius: 0.2rem !default;
 $input-border-radius-lg: $border-radius-lg !default;
 $input-border-radius-sm: $border-radius-sm !default;
 $input-focus-bg: $input-bg !default;

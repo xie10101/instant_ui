@@ -26,15 +26,6 @@ export interface InputProps extends Omit<
   placeholder?: string;
 }
 
-// export type InputPropsPro = InputProps &  React.RefAttributes<HTMLInputElement>
-
-// 获取表单标签原生属性类型：
-// type props = ComponentProps<"input">
-// type InputPropsNative = React.InputHTMLAttributes<HTMLInputElement>
-//  // 使用此方法获取的好处: 返回接口类型 , 可以直接extends 扩展定义 ;
-
-// type InputPropsPro = InputProps & InputPropsNative
-
 /**
  * Input 输入框 通过鼠标或键盘输入内容，是最基础的表单域的包装。
  *
@@ -105,6 +96,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 export default Input;
 
+//  可补充
 {
   /* input 属于表单组件 一部分： 常常用于表单提交的快捷方式 ：
             name 表单项字段名 

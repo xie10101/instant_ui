@@ -15,7 +15,7 @@ const test1Props = {
   type: 'primary',
   className: 'test',
   size: 'large',
-};
+} as const; // 断言 帮助是被为 字面量类型
 const disabledProps = {
   disabled: true,
   onClick: jest.fn(),

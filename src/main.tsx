@@ -10,13 +10,8 @@ export { default as Menu } from './components/Menu/index';
 export { default as Card } from './components/Card';
 // 聚合导出 -- 实际是 import Button xx + export { Button }
 
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
 //  ---React处理基础 --根容器 -- 根容器渲染 - 虚拟DOM 设置
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+createRoot(document.getElementById('root') as HTMLElement).render(<App />);

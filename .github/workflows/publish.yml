@@ -1,0 +1,58 @@
+name: 📦 发布到 NPM
+
+on:
+  release:
+    types: [created, published]
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: '发布类型'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 🔍 检查代码
+        uses: actions/checkout@v4
+
+      - name: 📦 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: 📥 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 📚 安装依赖
+        run: pnpm install
+
+      - name: 🔍 代码规范检查
+        run: pnpm lint:strict
+
+      - name: ✅ 运行测试
+        run: pnpm test:nowatch
+
+      - name: 🔨 构建项目
+        run: pnpm build
+
+      - name: 📤 发布到 NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 🎉 发布成功
+        run: echo "✅ 包已成功发布到 NPM！"

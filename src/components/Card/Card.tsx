@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 import classNames from 'classnames';
 import './_style.scss';
 
@@ -17,7 +17,9 @@ interface CardInterface extends FC<CardProps> {
 const Card: CardInterface = (props) => {
   const { title, className, children, size } = props;
   const classes = classNames(`card card-${size}`, className);
-
+  useEffect(() => {
+    console.log('Card mounted');
+  }, []);
   return (
     <div className={classes}>
       {title && <div className="card-header">{title}</div>}
