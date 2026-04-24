@@ -8,10 +8,5 @@ export { default as Progress } from './components/Progress';
 export { default as Upload } from './components/Upload';
 export { default as Menu } from './components/Menu/index';
 export { default as Card } from './components/Card';
-// 聚合导出 -- 实际是 import Button xx + export { Button }
-
-import { createRoot } from 'react-dom/client';
-import App from './App';
-
-//  ---React处理基础 --根容器 -- 根容器渲染 - 虚拟DOM 设置
-createRoot(document.getElementById('root') as HTMLElement).render(<App />);
+import { Form, FormItem } from './components/Form';
+export { Form, FormItem };

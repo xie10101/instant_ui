@@ -46,7 +46,7 @@ const confirmRules: CoustomRule[] = [
   }),
 ];
 
-function handleSubmit(values) {
+function handleSubmit() {
   console.log('onFinish触发');
   console.log('handleFailsubmit触发');
 }

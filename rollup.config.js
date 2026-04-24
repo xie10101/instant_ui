@@ -29,7 +29,7 @@ const config = {
       sourcemap: true,
     },
   ],
-  external: ['react', 'react-dom'], // 外部化依赖
+  external: ['react', 'react-dom', 'react-transition-group', 'lodash', 'axios'], // 外部化依赖
   plugins: [
     nodeResolve(),
     json(),
@@ -40,7 +40,7 @@ const config = {
       declaration: false, // 由 rollup-plugin-dts 单独处理
     }),
     postcss({
-      modules: true, // 启用 CSS Modules
+      modules: false, // 启用 CSS Modules
       extract: 'styles.css', // 提取全局 CSS
       minimize: true,
       use: {

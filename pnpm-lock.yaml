@@ -17,32 +17,20 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^0.2.2
         version: 0.2.6(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.2.4)
-      '@types/lodash':
-        specifier: ^4.17.24
-        version: 4.17.24
       async-validator:
         specifier: ^4.2.5
         version: 4.2.5
       axios:
-        specifier: ^1.9.0
+        specifier: '>=1.9.0'
         version: 1.13.6
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      eslint-config-prettier:
-        specifier: ^10.1.8
-        version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-jsx-a11y:
-        specifier: ^6.10.2
-        version: 6.10.2(eslint@9.39.4(jiti@2.6.1))
-      eslint-plugin-react:
-        specifier: ^7.37.5
-        version: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       lodash:
-        specifier: ^4.18.1
+        specifier: '>=4.0.0'
         version: 4.18.1
       react-transition-group:
-        specifier: ^4.4.5
+        specifier: '>=4.4.0'
         version: 4.4.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@chromatic-com/storybook':
@@ -99,6 +87,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
+      '@types/lodash':
+        specifier: ^4.17.24
+        version: 4.17.24
       '@types/node':
         specifier: ^22.15.17
         version: 22.19.15
@@ -138,6 +129,15 @@ importers:
       eslint:
         specifier: ^9.22.0
         version: 9.39.4(jiti@2.6.1)
+      eslint-config-prettier:
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-jsx-a11y:
+        specifier: ^6.10.2
+        version: 6.10.2(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-react:
+        specifier: ^7.37.5
+        version: 7.37.5(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.39.4(jiti@2.6.1))

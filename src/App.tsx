@@ -14,19 +14,19 @@ export default function App() {
       message: '密码长度不能小于3且不能大于10',
     },
     // 关键自定义验证规则的设置 -- validator会交给自定义方法自己执行
-    // ({ getFieldValue }) => ({
-    //   // asyncValidator 参数的含义是固定的
-    //   asyncValidator(rule, value, callback, source, options) {
-    //     if (value !== getFieldValue('password')) {
-    //       callback('密码不一致');
-    //     } else {
-    //       callback();
-    //     }
-    //   },
-    // }),
+    ({ getFieldValue }) => ({
+      // asyncValidator 参数的含义是固定的
+      asyncValidator(rule, value, callback, source, options) {
+        if (value !== getFieldValue('password')) {
+          callback('密码不一致');
+        } else {
+          callback();
+        }
+      },
+    }),
   ];
 
-  const handleFinish = (values) => {
+  const handleFinish = () => {
     console.log('handleFinish');
   };
 

@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import './_style.scss';
 import useStore, { FormState } from './useStore';
-import React, { useMemo } from 'react';
+import React, { useMemo, useImperativeHandle } from 'react';
 import Card from '../Card';
 import { ValidateError } from 'async-validator';
-import { useImperativeHandle } from 'react';
 export type RenderProps = (form: FormState) => React.ReactNode;
 
 interface FormProps {
@@ -30,10 +29,9 @@ export const FormContext = React.createContext<tFormContext>(
   {} as tFormContext
 );
 
-export type IFormRef = Omit<
-  ReturnType<typeof useStore>,
-  'fields' | 'dispatch' | 'form'
->;
+export type IFormRef =
+  | Omit<ReturnType<typeof useStore>, 'fields' | 'dispatch' | 'form'>
+  | HTMLFormElement;
 const Form = React.forwardRef<IFormRef, FormProps>((props, ref) => {
   const { form, fields, dispatch, ...restFun } = useStore(props.initialValues);
 
@@ -92,15 +90,15 @@ const Form = React.forwardRef<IFormRef, FormProps>((props, ref) => {
         onSubmit={handleSumbit}
         ref={ref}
       >
-        <FormContext.Provider value={{ ...passedContext }}>
+        <FormContext.Provider value={passedContext}>
           {childrenNode}
         </FormContext.Provider>
       </form>
 
       {/* 用于展示 form - fields 数据内容 */}
-      <Card className="" title="表单数据">
+      {/* <Card className="" title="表单数据">
         <pre>{JSON.stringify({ form, fields }, null, 2)}</pre>
-      </Card>
+      </Card> */}
     </>
   );
 });
