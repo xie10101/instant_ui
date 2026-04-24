@@ -1,0 +1,96 @@
+// 检查是否可以使用已经定义的scss变量
+// 只有引入才能使用 - 可以进行全局引入
+@use '../../styles/mixins' as *; // 引入mixins.scss文件
+@use '../../styles/variables.scss' as var;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var.$card-bg;
+  background-clip: border-box;
+  border: var.$card-border-width solid var.$card-border-color;
+  border-radius: var.$card-border-radius;
+  box-shadow: var.$card-box-shadow;
+  margin-bottom: var.$spacer;
+  transition: all 0.3s ease;
+  width: var.$card-width;
+  // size 样式设置
+  &.card-small {
+    border-radius: var.$card-border-radius-sm;
+    width: var.$card-width-sm;
+    .card-header,
+    .card-footer {
+      font-size: var.$card-font-size-sm;
+    }
+    .card-content {
+      padding: var.$card-spacer-y-sm var.$card-spacer-x-sm;
+      font-size: var.$card-font-size-sm;
+    }
+  }
+
+  &.card-large {
+    width: var.$card-width-lg;
+    border-radius: var.$card-border-radius-lg;
+    .card-header,
+    .card-footer {
+      font-size: var.$card-font-size-lg;
+    }
+    .card-content {
+      padding: var.$card-spacer-y-lg var.$card-spacer-x-lg;
+      font-size: var.$card-font-size-lg;
+    }
+  }
+
+  // 头部样式
+  .card-header {
+    padding: var.$card-cap-padding-y var.$card-cap-padding-x;
+    margin-bottom: 0;
+
+    border-bottom: var.$card-border-width solid var.$card-border-color;
+    font-size: var.$alert-title-font-size;
+    font-weight: var.$font-weight-bold;
+    color: var.$card-cap-color;
+
+    &:first-child {
+      border-radius: var.$card-inner-border-radius var.$card-inner-border-radius
+        0 0;
+    }
+  }
+
+  // 内容区样式
+  .card-content {
+    flex: 1 1 auto;
+    padding: var.$card-spacer-y var.$card-spacer-x;
+    color: var.$card-color;
+
+    .card-text {
+      margin-top: 0;
+      margin-bottom: var.$spacer;
+      font-size: var.$font-size-base;
+      line-height: var.$line-height-base;
+      color: var.$body-color;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // 页脚样式
+  .card-footer {
+    padding: var.$card-cap-padding-y var.$card-cap-padding-x;
+
+    &:last-child {
+      border-radius: 0 0 var.$card-inner-border-radius
+        var.$card-inner-border-radius;
+    }
+  }
+
+  // 悬浮效果 (可选)
+  &:hover {
+    box-shadow: var.$box-shadow;
+  }
+}

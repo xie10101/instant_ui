@@ -48,7 +48,6 @@ const config = {
           implementation: sassImplementation, // 使用 Dart Sass
         },
       },
-      extract: true, // 提取为独立 CSS 文件
       sourceMap: true, // 可选：生成 sourcemap
     }),
   ],

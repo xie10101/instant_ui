@@ -9,6 +9,7 @@ interface ProgressProps {
   strokeHeight?: number;
   styles?: React.CSSProperties;
   theme?: ThemeProps;
+  className?: string;
 }
 
 const Progress: FC<ProgressProps> = (props) => {
@@ -18,13 +19,14 @@ const Progress: FC<ProgressProps> = (props) => {
     strokeHeight = 15,
     styles,
     theme = 'primary',
+    className,
   } = props;
 
   return (
     <>
       <div className={`instant-progress`}>
         <div
-          className="instant-progress-outer"
+          className={`instant-progress-outer ${className}`}
           style={{ height: `${strokeHeight}px`, ...styles }}
         >
           <div

@@ -1,0 +1,127 @@
+@use '../../styles/variables.scss' as var;
+
+// Form 组件样式
+// 参考 antd Form 设计规范
+
+.instant-form {
+  margin-bottom: var.$form-margin-bottom;
+  width: 40rem;
+  // ========== Form Item ==========
+  .instant-form-item {
+    margin-bottom: var.$form-item-margin-bottom;
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    width: 100%;
+    // 最后一项默认无下边距
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // 紧凑模式
+    &.form-item-compact {
+      margin-bottom: var.$form-compact-item-margin-bottom;
+    }
+
+    // 无外边距模式
+    &.form-item-no-margin {
+      margin-bottom: 0;
+    }
+  }
+
+  // ========== Form Label ==========
+  .instant-form-item-label {
+    width: 6rem;
+    text-align: center;
+    display: inline-block;
+    font-size: var.$form-label-font-size;
+    color: var.$form-label-color;
+    font-weight: var.$form-label-font-weight;
+    line-height: var.$form-label-line-height;
+    margin-bottom: var.$form-label-margin-bottom;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    // 必填标记
+    &.form-label-required::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: var.$form-label-required-color;
+      font-size: var.$form-label-font-size;
+      font-family: SimSun, sans-serif;
+      line-height: 1;
+      content: '*';
+    }
+
+    // 可选标记
+    .form-label-optional {
+      margin-left: 4px;
+      color: var.$form-label-optional-color;
+      font-size: var.$form-help-font-size;
+    }
+
+    // 冒号后缀
+    &.form-label-colon::after {
+      content: ':';
+      position: relative;
+      top: -0.5px;
+      margin: 0 8px 0 2px;
+    }
+  }
+
+  // ========== Form Control ==========
+  .instant-form-item-control {
+    width: 80%;
+    line-height: var.$line-height-base;
+    border: 1px solid red;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    &:focus {
+      box-shadow: -1px 1px 3px 3px rgba(238, 18, 18, 0.3);
+    }
+
+    // 输入框内容
+    .form-item-control-input-content {
+      flex: 1;
+      max-width: var.$input-max-width;
+    }
+  }
+
+  //设置报错提示信息  // 样式处理存在问题
+  .form-item-validate-feedback {
+    flex: 1;
+    font-size: small;
+    color: red;
+    top: 2.5rem;
+  }
+
+  .zoom-in-top-enter {
+    opacity: 0;
+    transform: scaleY(0); // 初始状态下缩小
+    transform-origin: top; // 从顶部开始缩放
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease; // 添加过渡效果
+  }
+
+  .zoom-in-top-enter-active {
+    opacity: 1;
+    transform: scaleY(1); // 最终状态下恢复正常大小
+    transform-origin: center top;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
+  }
+
+  .zoom-in-top-exit {
+    opacity: 1;
+  }
+
+  .zoom-in-top-exit-active {
+    opacity: 0;
+    transform: scaleY(0); // 初始状态下缩小
+    transform-origin: center top;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease; // 添加过渡效果
+  }
+}
